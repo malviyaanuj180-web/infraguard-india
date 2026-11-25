@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFRAGUARD — Autonomous Infrastructure Health Monitoring & Structural Integrity Twin</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e0231c' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Local Three.js & OrbitControls -->
+  <script src="libs/three.min.js"></script>
+  <script src="libs/OrbitControls.js"></script>
+</head>
+<body class="shader-frame theme-light">
+  <div class="kage-ui-shell enterprise-app-layout">
+
+    <!-- ======================================================================
+         LEFT ENTERPRISE SAAS SIDEBAR NAVIGATION
+         ====================================================================== -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand">
+          <div class="brand-shield">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="M9 12l2 2 4-4"></path>
+            </svg>
+          </div>
+          <div class="brand-info">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span class="brand-title">InfraGuard</span>
+              <span class="enterprise-pill">INDIA</span>
+            </div>
+            <span class="brand-subtitle">NHAI • MoRTH • IRC Structural Twin</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-nav-scroll">
+        <div class="nav-group-label">Monitoring &amp; Analytics</div>
+        <nav class="page-nav">
+          <button class="nav-link active" data-page="page-overview">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+            </svg>
+            <span>Dashboard Overview</span>
+          </button>
+
+          <button class="nav-link" data-page="page-twin">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <span>3D Digital Twin</span>
+          </button>
+
+          <button class="nav-link" data-page="page-vision">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <span>Drone Vision Lab</span>
+          </button>
+
+          <button class="nav-link" data-page="page-telemetry">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            <span>IoT &amp; Sensor Trust</span>
+          </button>
+
+          <div class="nav-group-label" style="margin-top: 14px;">Operations &amp; Governance</div>
+
+          <button class="nav-link" data-page="page-dispatch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              <path d="M9 14l2 2 4-4"></path>
+            </svg>
+            <span>Field Work Orders</span>
+          </button>
+
+          <button class="nav-link" data-page="page-reports">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>Compliance &amp; Audit</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-status-box">
+          <div class="live-pill" id="ws-status-pill">
+            <span class="pulse-dot"></span>
+            <span id="ws-status-text">200 Hz Telemetry Live</span>
+          </div>
+          <span class="sidebar-status-sub">IS 456 • IRC:112 • MoRTH IBMS</span>
+        </div>
+
+        <!-- AUTH / USER PROFILE CHIP & SIGN OUT -->
+        <div class="sidebar-user-row">
+          <div id="btn-user-auth" class="user-chip sidebar-user-chip" title="Click to Switch Account or Verify Phone 2FA">
+            <div class="user-avatar">RI</div>
+            <div class="user-meta">
+              <span id="user-display-name" class="user-name">Dr. Rajesh Iyer, FIE</span>
+              <span id="user-role-badge" class="user-badge">NHAI Chief Engineer</span>
+            </div>
+          </div>
+          <button id="btn-sign-out" class="btn-sidebar-logout" title="Sign Out &amp; Open Enterprise Login Portal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         RIGHT MAIN APPLICATION WORKSPACE
+         ====================================================================== -->
+    <div class="app-main-workspace">
+
+      <!-- TOP WORKSPACE HEADER BAR -->
+      <header class="app-navbar workspace-topbar">
+        <div class="topbar-left">
+          <div class="asset-selector-wrap">
+            <span class="sel-label">Indian Asset</span>
+            <select id="asset-select" class="nav-select">
+              <option value="CA-DOT-BR-8842">MTHL-01 — Atal Setu Trans Harbour Link Span #14, Mumbai (120m)</option>
+              <option value="MH-MSRDC-BW-102">MSRDC-102 — Bandra-Worli Sea Link Pylon #4, Mumbai</option>
+              <option value="NY-DOT-OV-409">NR-USBRL-409 — Chenab Rail Arch Viaduct Pier #3, Reasi (J&amp;K)</option>
+              <option value="CA-DOT-RW-214">NHAI-DL-214 — Signature Bridge Yamuna Pylon &amp; Retaining Wall, Delhi</option>
+            </select>
+          </div>
+
+          <div class="lens-selector-wrap">
+            <span class="sel-label">Condition</span>
+            <select id="lens-select" class="nav-select lens-select">
+              <option value="dry_baseline">Dry Baseline (Ambient Indian Standard)</option>
+              <option value="post_monsoon">Post-Monsoon (IMD Heavy Rainfall &amp; Scour)</option>
+              <option value="traffic_surge">Traffic Surge (IRC Class 70R Freight Overload)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="nav-controls-section">
+          <a href="/presentation.html" class="nav-btn ghost-btn" style="text-decoration:none; border-color:#2563EB; color:#2563EB; font-weight:600;" title="Open SUSTAINOVA 2026 Interactive Pitch Deck &amp; Download PPTX">
+            <span>SUSTAINOVA 2026 PPT</span>
+          </a>
+
+          <button id="btn-theme-toggle" class="nav-btn ghost-btn" title="Switch between Enterprise Light and Dark Theme">
+            <span id="theme-toggle-label">Dark Mode</span>
+          </button>
+
+          <button id="btn-voice-toggle" class="nav-btn ghost-btn active" title="Toggle Voice Assistant &amp; Audio Telemetry">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            </svg>
+            <span id="voice-btn-label">Voice Assistant: ON</span>
+          </button>
+
+          <button id="btn-judge-tour" class="nav-btn ghost-btn" title="Launch Guided Platform Walkthrough">
+            <span>Guided Tour</span>
+          </button>
+
+          <button id="btn-trigger-critical" class="nav-btn btn-critical-pulse" title="Simulate Immediate 80-Ton Heavy Overload Breach">
+            <span>Simulate Overload</span>
+          </button>
+        </div>
+      </header>
+
+    <!-- GUIDED JUDGE PITCH TOUR SPOTLIGHT BAR -->
+    <div id="judge-tour-bar" class="judge-tour-bar hidden">
+      <div class="jt-left">
+        <span id="jt-step-badge" class="badge-tag tag-cyan">PITCH TOUR // STEP 1 OF 6</span>
+        <strong id="jt-step-title">Regional Portfolio & Cross-Check Matrix</strong>
+        <span id="jt-step-desc" class="jt-desc">Fuses Vision, LiDAR ICP, and LSTM Modal dynamics to rank regional highway bridges by structural urgency.</span>
+      </div>
+      <div class="jt-actions">
+        <button id="btn-jt-prev" class="tool-btn small">◀ Prev</button>
+        <button id="btn-jt-next" class="tool-btn small active">Next Step ▶</button>
+        <button id="btn-jt-auto" class="tool-btn small">▶ Auto-Play</button>
+        <button id="btn-jt-close" class="tool-btn small">✕ Exit</button>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         PAGE 1: OVERVIEW & REGIONAL PORTFOLIO FLEET HUB
+         ====================================================================== -->
+    <section id="page-overview" class="app-page active">
+      <!-- TOP TELEMETRY KPI RIBBON (4 METRICS) -->
+      <div class="kpi-ribbon">
+        <!-- KPI 1: STRUCTURAL HEALTH INDEX -->
+        <div class="kpi-card" id="card-shi">
+          <div class="kpi-header">
+            <span class="kpi-title">STRUCTURAL HEALTH INDEX</span>
+            <span id="kpi-nbis-badge" class="badge-tag tag-good">NBIS 8</span>
+          </div>
+          <div class="kpi-body">
+            <div class="shi-circle-wrap">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path id="shi-circle-bar" class="circle" stroke-dasharray="94.2, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <span id="kpi-shi-num" class="shi-val">94.2</span>
+            </div>
+            <div class="kpi-details">
+              <span id="kpi-shi-label" class="kpi-subtext color-good">Satisfactory Condition</span>
+              <span class="kpi-desc">Composite health index fusing Vision, LiDAR ICP, and LSTM Modal dynamics.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI 2: PARIS' LAW REMAINING USEFUL LIFE -->
+        <div class="kpi-card" id="card-rul">
+          <div class="kpi-header">
+            <span class="kpi-title">PARIS' LAW RUL (FATIGUE)</span>
+            <span id="kpi-rul-badge" class="badge-tag tag-good">SAFE MARGIN</span>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-main-stat">
+              <span id="kpi-rul-days" class="stat-large">6,387</span>
+              <span class="stat-unit">DAYS (17.5 YRS)</span>
+            </div>
+            <div class="kpi-details">
+              <div class="k-ratio-row">
+                <span class="k-ratio-label">ΔK / K<sub>IC</sub> Ratio:</span>
+                <strong id="kpi-k-ratio" class="k-ratio-val">22.4%</strong>
+              </div>
+              <div class="progress-bar-wrap">
+                <div id="kpi-k-fill" class="progress-bar-fill fill-safe" style="width: 22.4%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI 3: 3D LIDAR GIRDER SAG DEFLECTION -->
+        <div class="kpi-card" id="card-sag">
+          <div class="kpi-header">
+            <span class="kpi-title">3D LIDAR SAG DEFLECTION</span>
+            <span id="kpi-sag-badge" class="badge-tag tag-good">&lt; L/800 Limit</span>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-main-stat">
+              <span id="kpi-sag-val" class="stat-large">18.4</span>
+              <span class="stat-unit">MM VERTICAL</span>
+            </div>
+            <div class="kpi-details">
+              <span id="kpi-sag-limit-text" class="kpi-subtext">12.3% of AASHTO 150.0mm allowable</span>
+              <span class="kpi-desc">Open3D SVD ICP baseline alignment vs live LiDAR scan.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI 4: CROSS-CHECK MATRIX -->
+        <div class="kpi-card" id="card-matrix">
+          <div class="kpi-header">
+            <span class="kpi-title">CROSS-CHECK MATRIX</span>
+            <span id="kpi-matrix-badge" class="badge-tag tag-cyan">SURFACE NOISE</span>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-main-stat">
+              <span id="kpi-matrix-status" class="stat-medium color-cyan">Cosmetic Surface Cracking</span>
+            </div>
+            <div class="kpi-details">
+              <span id="kpi-matrix-detail" class="kpi-subtext">Wide surface crack verified harmless via stable modal vibration dynamics.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OVERVIEW MAIN TWO-COLUMN SECTION -->
+      <div class="overview-grid">
+        <!-- LEFT: REGIONAL ASSET FLEET PORTFOLIO -->
+        <div class="glass-card overview-portfolio-card">
+          <div class="card-title-bar">
+            <div>
+              <h3>National Infrastructure Portfolio Fleet (India)</h3>
+              <span class="sub-label">Automated multi-modal urgency ranking across NHAI, MSRDC &amp; Indian Railways assets</span>
+            </div>
+            <span class="badge-tag tag-cyan">4 ACTIVE CORRIDORS</span>
+          </div>
+
+          <div class="portfolio-rank-list">
+            <div id="portfolio-items-container" class="portfolio-scroll full-list">
+              <!-- Dynamically populated portfolio list -->
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: EMERGENCY ACTION DISPATCH & GIS OVERVIEW -->
+        <div class="overview-right-column">
+          <!-- ACTIONABLE FIELD DISPATCH CARD FOR RANK #1 -->
+          <div class="dispatch-work-card highlight-card">
+            <div class="dispatch-header">
+              <div>
+                <span id="dispatch-tier-badge" class="badge-tag tag-red">TIER 1 EMERGENCY</span>
+                <h4 id="dispatch-target-title">Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai</h4>
+              </div>
+              <button id="btn-issue-dispatch" class="btn-dispatch-action">
+                <span>DISPATCH FIELD TEAM</span>
+              </button>
+            </div>
+
+            <div class="dispatch-body">
+              <div class="dispatch-row">
+                <span class="d-label">Window:</span>
+                <strong id="dispatch-window" class="d-val color-red">Action Required Within 12 Hours</strong>
+              </div>
+              <div class="dispatch-row">
+                <span class="d-label">Assigned Crew:</span>
+                <span id="dispatch-crew" class="d-val">NHAI / CSIR-SERC Rapid Response Unit Alpha (Lead: Vikramaditya Deshmukh, NDT Level III)</span>
+              </div>
+              <div class="dispatch-row">
+                <span class="d-label">Protocol:</span>
+                <span id="dispatch-protocol" class="d-val">Phased Array Ultrasonic Testing (PAUT) of deck welds &amp; drone LiDAR sag verification per IRC:SP:37.</span>
+              </div>
+              <div class="dispatch-justification">
+                <p id="dispatch-justification-text">Ranks #1 in urgency under MoRTH IBMS criteria due to cyclic fatigue under IRC Class 70R freight surge. Paris' Law calculates remaining life below critical fracture margin.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- EMBEDDED GIS MAP PREVIEW -->
+          <div class="glass-card overview-geo-card">
+            <div class="card-title-bar">
+              <div>
+                <h4>National Geotechnical GIS Corridor Map (India)</h4>
+                <span id="overview-gis-coords" class="sub-label">Mumbai Trans Harbour Link Corridor (18.9633° N, 72.9750° E)</span>
+              </div>
+              <button id="btn-geo-modal" class="tool-btn small">Expand GIS Map</button>
+            </div>
+            <div class="geo-map-container mini-map">
+              <canvas id="overview-gis-canvas" width="540" height="180"></canvas>
+              <div class="geo-marker pin-deck" data-beacon="beacon-span-ab">
+                <span class="marker-pulse"></span>
+                <span class="marker-label">Span A-B Midspan</span>
+              </div>
+              <div class="geo-marker pin-pier2" data-beacon="beacon-pier-2">
+                <span class="marker-pulse"></span>
+                <span class="marker-label">Pier #2</span>
+              </div>
+              <div class="geo-marker pin-pier3" data-beacon="beacon-pier-3">
+                <span class="marker-pulse"></span>
+                <span class="marker-label">Pier #3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PAGE 2: 3D DIGITAL TWIN COMMAND CENTER
+         ====================================================================== -->
+    <section id="page-twin" class="app-page">
+      <div class="twin-page-layout">
+        <!-- 3D VIEWPORT CONTAINER -->
+        <div class="twin-header-bar">
+          <div class="th-left">
+            <h3>Holographic Structural Digital Twin</h3>
+            <span class="th-meta">Span A-B Midspan • Finite Element Coordinate Space • Open3D ICP Deflection</span>
+          </div>
+          <div class="th-tools">
+            <button id="btn-toggle-fea" class="tool-btn active" title="Toggle Finite-Element Von Mises Stress Contour">
+              <span>FEA Stress Contour</span>
+            </button>
+            <button id="btn-toggle-ghost" class="tool-btn active" title="Toggle T0 Ghost Baseline">
+              <span>Ghost T₀</span>
+            </button>
+            <button id="btn-toggle-lidar" class="tool-btn" title="Overlay Open3D ICP 3D LiDAR Point Cloud">
+              <span>LiDAR Cloud (ICP)</span>
+            </button>
+            <button id="btn-toggle-scanline" class="tool-btn active" title="Toggle Laser Sweep Animation">
+              <span>Laser Sweep</span>
+            </button>
+            <button id="btn-reset-cam" class="tool-btn" title="Reset Viewport Perspective">
+              <span>Reset Cam</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="three-container-wrap fullscreen-stage">
+          <div id="three-canvas-container"></div>
+          <div id="beacon-tooltip" class="beacon-tooltip hidden"></div>
+
+          <!-- FEA VON MISES STRESS LEGEND OVERLAY -->
+          <div class="fea-legend-box">
+            <span class="fea-title">FEA VON MISES STRESS (MPa)</span>
+            <div class="fea-gradient-bar"></div>
+            <div class="fea-scale-labels">
+              <span>40 MPa (Safe)</span>
+              <span>220 MPa</span>
+              <span>420 MPa (Yield)</span>
+            </div>
+          </div>
+
+          <!-- 3D FLOATING HUD OVERLAY -->
+          <div id="three-hud-overlay" class="hud-overlay">
+            <div class="hud-box">
+              <span class="hud-label">SURFACE MESH DEFLECTION:</span>
+              <span id="hud-deflection-text" class="hud-val">Δz: -18.4 mm</span>
+            </div>
+            <div class="hud-box">
+              <span class="hud-label">OPEN3D ICP ALIGNMENT:</span>
+              <span id="hud-icp-text" class="hud-val color-cyan">RMSE: 1.12 mm • 95th: 21.8 mm</span>
+            </div>
+            <div class="hud-box">
+              <span class="hud-label">ACTIVE 3D ANOMALY BEACON:</span>
+              <span id="hud-beacon-text" class="hud-val color-amber">Span A-B Deck (Midspan)</span>
+            </div>
+          </div>
+
+          <!-- 3D ANOMALY BEACON SELECTION CHIPS -->
+          <div class="beacon-selector-strip">
+            <span class="strip-label">ANOMALY BEACONS:</span>
+            <button class="node-chip active" data-beacon="beacon-span-ab">
+              <span class="chip-dot dot-red"></span> Span A-B Deck
+            </button>
+            <button class="node-chip" data-beacon="beacon-pier-2">
+              <span class="chip-dot dot-amber"></span> Pier #2 Mid-Column
+            </button>
+            <button class="node-chip" data-beacon="beacon-pier-3">
+              <span class="chip-dot dot-red"></span> Pier #3 Base Joint
+            </button>
+            <button class="node-chip" data-beacon="beacon-cable-east">
+              <span class="chip-dot dot-cyan"></span> East Stay Cable
+            </button>
+          </div>
+        </div>
+
+        <!-- LOWER CONTROLS: 5-YEAR TIME-MACHINE & WHAT-IF ENGINE -->
+        <div class="twin-bottom-grid">
+          <!-- 5-YEAR TIME-MACHINE SCRUBBER -->
+          <div class="glass-card time-machine-card">
+            <div class="tm-header">
+              <div class="tm-title-group">
+                <h4>5-Year Degradation Time-Machine</h4>
+                <span id="playback-year-badge" class="badge-tag tag-cyan">YEAR 0.00</span>
+              </div>
+              <div class="tm-actions">
+                <button id="btn-play-pause" class="tool-btn play-btn">
+                  <span id="play-icon">▶</span>
+                  <span id="play-text">PLAY</span>
+                </button>
+                <button id="btn-speed" class="tool-btn speed-btn">1.0x</button>
+              </div>
+            </div>
+
+            <div class="scrubber-track-wrap">
+              <input type="range" id="time-slider" min="0" max="5" step="0.05" value="0" class="time-slider">
+              <div class="time-ticks">
+                <div class="tick-col active" data-year="0"><strong>Year 0</strong><span>Baseline</span></div>
+                <div class="tick-col" data-year="1"><strong>Year 1</strong><span>Microcracking</span></div>
+                <div class="tick-col" data-year="2"><strong>Year 2</strong><span>Chloride Ingress</span></div>
+                <div class="tick-col" data-year="3"><strong>Year 3</strong><span>Rebar Spalling</span></div>
+                <div class="tick-col" data-year="4"><strong>Year 4</strong><span>Section Loss</span></div>
+                <div class="tick-col" data-year="5"><strong>Year 5</strong><span>Critical Limit</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- "WHAT-IF" SENSITIVITY & CFRP RETROFIT ENGINE -->
+          <div class="glass-card whatif-card">
+            <div class="whatif-header-strip">
+              <h4>"What-If" Stress & Retrofit Sensitivity</h4>
+              <button id="btn-reset-whatif" class="tool-btn small">Reset Baseline</button>
+            </div>
+            <div class="whatif-controls-grid">
+              <div class="whatif-box">
+                <div class="whatif-header">
+                  <span class="w-label">HEAVY TRUCK LOAD</span>
+                  <span id="val-truck-load" class="w-val">100% (Legal Limit)</span>
+                </div>
+                <input type="range" id="slider-truck-load" min="50" max="200" step="5" value="100" class="slider-cyan">
+                <span class="w-desc">Axle weight factor directly scales cyclic stress amplitude Δσ.</span>
+              </div>
+
+              <div class="whatif-box">
+                <div class="whatif-header">
+                  <span class="w-label">ENVIRONMENTAL CORROSION</span>
+                  <span id="val-corrosion" class="w-val">1.0x (Standard)</span>
+                </div>
+                <input type="range" id="slider-corrosion" min="0.5" max="3.0" step="0.1" value="1.0" class="slider-amber">
+                <span class="w-desc">Marine splash & deicing salts accelerate Paris' crack growth rate C.</span>
+              </div>
+
+              <div class="whatif-box">
+                <div class="whatif-header">
+                  <span class="w-label">CARBON-FIBER (CFRP) RETROFIT</span>
+                  <span id="val-cfrp-badge" class="cfrp-badge off">INACTIVE</span>
+                </div>
+                <div class="cfrp-toggle-row">
+                  <label class="switch-toggle">
+                    <input type="checkbox" id="toggle-cfrp">
+                    <span class="toggle-slider"></span>
+                  </label>
+                  <div class="cfrp-info">
+                    <strong>+45% Fatigue Life Extension</strong>
+                    <p>Simulates bonded CFRP laminate plates relieving tension flange stress.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PARIS' LAW 5-YEAR RUL & FRACTURE TRAJECTORY CURVE (UNMITIGATED VS CFRP RETROFIT) -->
+        <div class="glass-card rul-chart-card">
+          <div class="card-title-bar">
+            <div>
+              <h4>Paris' Law 5-Year Fatigue & RUL Trajectory (da/dN = C(ΔK)<sup>m</sup>)</h4>
+              <span class="sub-label">Live comparison of Unmitigated Degradation (Vermilion) vs. Bonded CFRP Laminate Retrofit (+45% Life Extension, Emerald)</span>
+            </div>
+            <div class="chart-legend-inline">
+              <span class="leg-item"><i class="leg-dot dot-red"></i> Unmitigated RUL Curve</span>
+              <span class="leg-item"><i class="leg-dot dot-emerald"></i> With CFRP Retrofit (+45%)</span>
+              <span class="leg-item"><i class="leg-dot dot-cyan"></i> Active Time-Machine Year</span>
+            </div>
+          </div>
+          <div class="rul-canvas-wrap">
+            <canvas id="rul-trajectory-canvas" width="1100" height="145"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PAGE 3: DRONE AI VISION & CONCRETE CRACK LAB
+         ====================================================================== -->
+    <section id="page-vision" class="app-page">
+      <div class="page-container">
+        <div class="section-banner">
+          <div>
+            <h2>Drone Computer Vision & Crack Quantifier Lab</h2>
+            <p>Automated pixel-to-millimeter physical quantification via camera GSD and ACI 224R severity grading</p>
+          </div>
+          <div class="banner-controls">
+            <span class="b-label">Preset:</span>
+            <select id="select-vision-preset" class="nav-select">
+              <option value="span_ab_crack_critical">Span A-B Critical Flexural Crack (1.42mm)</option>
+              <option value="pier2_crack_moderate">Pier #2 Diagonal Shear Crack (0.48mm)</option>
+              <option value="healthy_deck_baseline">Deck Hairline / Baseline Surface (0.15mm)</option>
+            </select>
+            <span class="b-label">Alt (m):</span>
+            <input type="number" id="input-flight-alt" value="0.75" min="0.2" max="15.0" step="0.05" class="nav-select" style="width:68px;">
+            <span class="b-label">Focal (mm):</span>
+            <input type="number" id="input-focal-len" value="24.0" min="12.0" max="85.0" step="1.0" class="nav-select" style="width:68px;">
+            <button id="btn-run-vision" class="tool-btn active">Calibrate &amp; Quantify</button>
+            <input type="file" id="input-drone-upload" accept="image/*" class="hidden">
+            <button id="btn-upload-drone" class="tool-btn">Upload Drone Photo</button>
+          </div>
+        </div>
+
+        <div class="vision-lab-grid">
+          <!-- LARGE IMAGE VIEWPORT WITH BEFORE/AFTER AI MASK SPLIT SLIDER -->
+          <div class="glass-card vision-main-card">
+            <div class="card-title-bar">
+              <div>
+                <h4>High-Resolution Drone RGB & AI Crack Segmentation Split-Compare</h4>
+                <span class="sub-label">Swipe slider to compare Raw Drone RGB vs. YOLOv8-seg Medial-Axis Skeleton &amp; Spalling Heatmap</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="b-label">AI Mask Split:</span>
+                <input type="range" id="vision-compare-slider" min="0" max="100" value="62" class="slider-cyan" style="width:110px;">
+                <span id="vision-condition-badge" class="badge-tag tag-cyan">YOLOv8-seg Neural Segmenter</span>
+              </div>
+            </div>
+            <div class="vision-large-img-wrap" id="vision-compare-container">
+              <img id="drone-preview-img" src="/sample_data/test_images/span_ab_crack_critical.jpg" alt="Drone Inspection Image">
+              <canvas id="vision-mask-canvas"></canvas>
+              <div id="vision-split-line" class="vision-split-line" style="left: 62%;">
+                <span class="split-handle">◀ AI MASK | RAW ▶</span>
+              </div>
+              <div class="vision-img-hud">
+                <span id="vision-gsd-badge" class="gsd-badge">CAMERA GSD: 0.12 mm/px</span>
+                <span id="vision-flight-badge" class="flight-badge">ALTITUDE: 0.75m • FOCAL: 24.0mm</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DETAILED PHYSICAL QUANTIFICATION STATS -->
+          <div class="glass-card vision-details-card">
+            <div class="card-title-bar">
+              <h4>Physical Crack & Surface Quantification</h4>
+              <span class="badge-tag tag-red">ACI 224R TIER</span>
+            </div>
+
+            <div class="vision-metrics-stack">
+              <div class="v-metric-tile">
+                <span class="vm-label">MAX CRACK WIDTH</span>
+                <strong id="v-crack-width" class="vm-val color-red">1.42 mm (Critical)</strong>
+                <span class="vm-sub">Exceeds ACI 0.3mm allowable limit</span>
+              </div>
+
+              <div class="v-metric-tile">
+                <span class="vm-label">TOTAL CRACK LENGTH</span>
+                <strong id="v-crack-length" class="vm-val">428.5 mm</strong>
+                <span class="vm-sub">Skeletonized medial-axis contour</span>
+              </div>
+
+              <div class="v-metric-tile">
+                <span class="vm-label">CONCRETE SPALLING AREA</span>
+                <strong id="v-spall-area" class="vm-val">34.2 cm²</strong>
+                <span class="vm-sub">Delaminated concrete surface loss</span>
+              </div>
+
+              <div class="v-metric-tile">
+                <span class="vm-label">CORROSION / OXIDATION</span>
+                <strong id="v-corrosion-pct" class="vm-val">18.5% (High)</strong>
+                <span class="vm-sub">Chloride ingress surface staining</span>
+              </div>
+
+              <div class="v-metric-tile">
+                <span class="vm-label">EXPOSED REBAR DETECTED</span>
+                <strong id="v-rebar-status" class="vm-val color-red">YES (Galvanic Breach)</strong>
+                <span class="vm-sub">Immediate corrosion inhibitor required</span>
+              </div>
+            </div>
+
+            <div class="aci-callout wide-callout">
+              <span class="aci-title">MANDATORY COMPLIANCE DIRECTIVE:</span>
+              <p id="v-recommendation-text">Structural breach (>1.0mm). Exceeds allowable limits. Immediate structural mitigation required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PAGE 4: IOT TELEMETRY & SENSOR TRUST GUARD
+         ====================================================================== -->
+    <section id="page-telemetry" class="app-page">
+      <div class="page-container">
+        <div class="section-banner">
+          <div>
+            <h2>IoT Vibration, Modal Telemetry & Sensor Trust Guard</h2>
+            <p>Live 200 Hz WebSocket stream, SciPy Welch modal tracking, and Hardware Fault/Sabotage isolation</p>
+          </div>
+          <div class="banner-controls">
+            <button id="btn-run-fft-lstm" class="tool-btn active">Run Welch FFT &amp; LSTM Audit</button>
+            <button id="btn-sim-sensor-fault" class="tool-btn">Test Fault Quarantine</button>
+            <span id="fleet-trust-banner-badge" class="badge-tag tag-good">FLEET TRUST: 98.4%</span>
+          </div>
+        </div>
+
+        <!-- LIVE OSCILLOSCOPE & WELCH FFT PSD SPECTRUM -->
+        <div class="glass-card telemetry-oscilloscope-card">
+          <div class="card-title-bar">
+            <h4>Live 200 Hz Tri-axial Accelerometer Stream &amp; Welch PSD Modal Frequency Spectrum (Node S-01)</h4>
+            <div class="oscilloscope-meta">
+              <span class="badge-tag tag-cyan">TIME DOMAIN + WELCH FFT PSD</span>
+            </div>
+          </div>
+
+          <div class="dual-waveform-grid">
+            <div class="waveform-wrap">
+              <div class="wf-sub-header">
+                <span>TIME-DOMAIN ACCELERATION (200 Hz MEMS Z/X)</span>
+                <span class="color-cyan">g (m/s²)</span>
+              </div>
+              <canvas id="waveform-canvas" width="560" height="130"></canvas>
+            </div>
+            <div class="waveform-wrap">
+              <div class="wf-sub-header">
+                <span>FREQUENCY-DOMAIN WELCH PSD (f₁, f₂, f₃ MODAL PEAKS)</span>
+                <span class="color-warn">dB/Hz vs Baseline</span>
+              </div>
+              <canvas id="fft-spectrum-canvas" width="520" height="130"></canvas>
+            </div>
+          </div>
+
+          <div class="strain-row">
+            <div class="strain-stat">
+              <span class="ss-label">OPTICAL FBG STRAIN</span>
+              <span id="strain-microstrain-val" class="ss-val">345.2 με</span>
+              <span class="ss-sub">Fiber Bragg Grating sensor</span>
+            </div>
+            <div class="strain-stat">
+              <span class="ss-label">FUNDAMENTAL MODE 1 FREQ</span>
+              <span id="mode1-hz-val" class="ss-val">3.25 Hz</span>
+              <span class="ss-sub">SciPy Welch PSD Natural Peak</span>
+            </div>
+            <div class="strain-stat">
+              <span class="ss-label">PYTORCH LSTM AE ANOMALY</span>
+              <span id="metric-lstm-score" class="ss-val">0.050 MSE</span>
+              <span class="ss-sub">Reconstruction error threshold 0.15</span>
+            </div>
+            <div class="strain-stat">
+              <span class="ss-label">MODAL STIFFNESS LOSS</span>
+              <span id="metric-stiffness-loss" class="ss-val">0.0%</span>
+              <span class="ss-sub">Fundamental frequency tracking</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SENSOR TRUST FLEET AUDIT TABLE -->
+        <div class="glass-card telemetry-trust-card">
+          <div class="card-title-bar">
+            <h4>Sensor Trust Guard & Hardware Fault Isolation Fleet Audit</h4>
+            <span id="fleet-trust-card-badge" class="badge-tag tag-good">NO HARDWARE FLATLINES DETECTED</span>
+          </div>
+
+          <div class="sensor-trust-box full-audit">
+            <div class="sensor-node-row audit-row">
+              <div class="sn-info">
+                <strong class="sn-name">Node S-01 (Midspan Deck Accel)</strong>
+                <span class="sn-sub">MEMS Tri-axial • 200 Hz • Normal Variance (0.00021 g²)</span>
+              </div>
+              <span class="badge-tag tag-good">100% TRUSTED // HEALTHY</span>
+            </div>
+            <div class="sensor-node-row audit-row">
+              <div class="sn-info">
+                <strong class="sn-name">Node S-02 (Pier #2 Tiltmeter)</strong>
+                <span class="sn-sub">Biaxial Inclinometer • 10 Hz • Zero Drift Baseline</span>
+              </div>
+              <span class="badge-tag tag-good">98% TRUSTED // HEALTHY</span>
+            </div>
+            <div class="sensor-node-row audit-row">
+              <div class="sn-info">
+                <strong class="sn-name">Node S-03 (East Stay Cable Strain)</strong>
+                <span class="sn-sub">FBG Optical • High-Frequency Noise Detected (Loose Cable Mount)</span>
+              </div>
+              <span class="badge-tag tag-warn">68% DEGRADED // MOUNTING NOISE</span>
+            </div>
+            <div class="sensor-node-row audit-row">
+              <div class="sn-info">
+                <strong class="sn-name">Node S-04 (Submerged Pier Base Caisson)</strong>
+                <span class="sn-sub">Hydrostatic Pressure Cell • Scour Velocity Monitor</span>
+              </div>
+              <span class="badge-tag tag-good">100% TRUSTED // HEALTHY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PAGE 5: FIELD DISPATCH & OFFICIAL WORK ORDERS
+         ====================================================================== -->
+    <section id="page-dispatch" class="app-page">
+      <div class="page-container">
+        <div class="section-banner">
+          <div>
+            <h2>Enterprise Field Dispatch & Work Orders Hub</h2>
+            <p>Autonomous urgency ranking and official state highway inspection dispatch management</p>
+          </div>
+          <button id="btn-issue-dispatch-2" class="btn-dispatch-action">
+            <span>DISPATCH EMERGENCY CREW</span>
+          </button>
+        </div>
+
+        <!-- DISPATCH KPI ROW -->
+        <div class="dispatch-kpi-row">
+          <div class="kpi-mini-card">
+            <span class="km-label">EMERGENCY DISPATCHES</span>
+            <span id="dispatch-active-count" class="km-val color-red">1 ACTIVE</span>
+          </div>
+          <div class="kpi-mini-card">
+            <span class="km-label">SCHEDULED REVIEWS</span>
+            <span class="km-val color-warn">2 PENDING</span>
+          </div>
+          <div class="kpi-mini-card">
+            <span class="km-label">AVERAGE RESPONSE TIME</span>
+            <span class="km-val color-good">&lt; 3.5 HOURS</span>
+          </div>
+          <div class="kpi-mini-card">
+            <span class="km-label">COMPLIANCE ASSURANCE</span>
+            <span class="km-val color-cyan">100% MoRTH / IRC VERIFIED</span>
+          </div>
+        </div>
+
+        <!-- INTERACTIVE CUSTOM WORK ORDER BUILDER -->
+        <div class="glass-card wo-builder-card">
+          <div class="card-title-bar">
+            <div>
+              <h4>Create &amp; Dispatch New NHAI / MSRDC Structural Work Order</h4>
+              <span class="sub-label">Assign field NDT inspection crews and generate traceable MoRTH IBMS work orders</span>
+            </div>
+          </div>
+          <form id="form-create-wo" class="wo-builder-form">
+            <div class="wo-field">
+              <label>Target Indian Structure</label>
+              <select id="wo-build-asset" class="nav-select">
+                <option value="Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai (CA-DOT-BR-8842)">MTHL-01 — Atal Setu Trans Harbour Link, Mumbai</option>
+                <option value="Bandra-Worli Sea Link Pylon #4, Mumbai (MH-MSRDC-BW-102)">MSRDC-102 — Bandra-Worli Sea Link Pylon #4, Mumbai</option>
+                <option value="Chenab Rail Arch Viaduct Pier #3, Reasi J&amp;K (NY-DOT-OV-409)">NR-USBRL-409 — Chenab Rail Arch Viaduct, Reasi J&amp;K</option>
+                <option value="Signature Bridge Yamuna Pylon &amp; Retaining Wall, Delhi (CA-DOT-RW-214)">NHAI-DL-214 — Signature Bridge Yamuna Corridor, Delhi</option>
+              </select>
+            </div>
+            <div class="wo-field">
+              <label>Urgency Tier</label>
+              <select id="wo-build-tier" class="nav-select">
+                <option value="TIER 1 EMERGENCY">Tier 1 Emergency (Within 12 Hours)</option>
+                <option value="TIER 2 PRIORITY">Tier 2 Priority (Within 48 Hours)</option>
+                <option value="ROUTINE NDT">Routine Scheduled NDT</option>
+              </select>
+            </div>
+            <div class="wo-field">
+              <label>Assigned Lead Inspector</label>
+              <input type="text" id="wo-build-crew" value="Vikramaditya Deshmukh, NDT Level III" class="nav-select" required>
+            </div>
+            <div class="wo-field" style="flex:1.4;">
+              <label>Field NDT &amp; Retrofit Protocol (IRC:SP:37 / IRC:SP:40)</label>
+              <select id="wo-build-protocol" class="nav-select">
+                <option value="Phased Array Ultrasonic Testing (PAUT) &amp; LiDAR Sag Audit per IRC:SP:37">Phased Array Ultrasonic Testing (PAUT) &amp; LiDAR Sag Audit per IRC:SP:37</option>
+                <option value="Bonded Carbon-Fiber (CFRP) Tension Flange Laminate Wrap per IRC:SP:40">Bonded Carbon-Fiber (CFRP) Tension Flange Laminate Wrap per IRC:SP:40</option>
+                <option value="Submerged Pier Scour Bathymetric Sonar &amp; Epoxy Injection">Submerged Pier Scour Bathymetric Sonar &amp; Epoxy Injection</option>
+                <option value="Close-Range Drone Photogrammetry &amp; FBG Strain Calibration">Close-Range Drone Photogrammetry &amp; FBG Strain Calibration</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-dispatch-action" style="align-self:flex-end; height:34px;">+ Issue Work Order</button>
+          </form>
+        </div>
+
+        <!-- WORK ORDERS TABLE -->
+        <div class="glass-card work-orders-table-card">
+          <div class="card-title-bar">
+            <h4>Active &amp; Dispatched National Highway &amp; Rail Work Orders</h4>
+            <span class="badge-tag tag-cyan">MoRTH / NHAI AUDIT TRAIL</span>
+          </div>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>WORK ORDER #</th>
+                <th>ASSET / STRUCTURE (INDIA)</th>
+                <th>URGENCY TIER</th>
+                <th>ASSIGNED CREW</th>
+                <th>PROTOCOL</th>
+                <th>WINDOW</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="work-orders-tbody">
+              <tr data-wo-id="WO-INFRAGUARD-2026-8842" data-asset="Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai (CA-DOT-BR-8842)" data-gps="18.9633° N, 72.9750° E" data-tech="Vikramaditya Deshmukh, NDT Level III" data-time="2026-11-23 12:30:00 IST" data-protocol="Deploy CSIR-SERC Phased Array Ultrasonic Testing (PAUT) across midspan tension flange welds. Calibrate drone LiDAR point clouds to measure vertical girder sag deflection against IRC:112 L/800 limits.">
+                <td class="font-mono">WO-INFRAGUARD-2026-8842</td>
+                <td><strong>Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai</strong><br><span class="sub-cell">MMRDA / MSRDC • 18.9633° N, 72.9750° E</span></td>
+                <td><span class="badge-tag tag-red">TIER 1 EMERGENCY</span></td>
+                <td>Vikramaditya Deshmukh, NDT Level III</td>
+                <td>Phased Array Ultrasonic (PAUT)</td>
+                <td>Within 12 Hours</td>
+                <td><span class="order-status-badge">CREW EN ROUTE</span></td>
+                <td><button class="tool-btn small btn-open-wo-modal">View Order</button></td>
+              </tr>
+              <tr data-wo-id="WO-INFRAGUARD-2026-4102" data-asset="Bandra-Worli Sea Link Pylon #4, Mumbai (MH-MSRDC-BW-102)" data-gps="19.0368° N, 72.8172° E" data-tech="Rajesh Mehta, CEng (India)" data-time="2026-11-23 10:15:00 IST" data-protocol="Execute Submerged Pier Scour Sonar Audit and Acoustic Emission monitoring of cable stay anchorages after Arabian Sea monsoon surge per IRC:SP:37.">
+                <td class="font-mono">WO-INFRAGUARD-2026-4102</td>
+                <td><strong>Bandra-Worli Sea Link Pylon #4, Mumbai</strong><br><span class="sub-cell">MH-MSRDC-BW-102 • Western Freeway</span></td>
+                <td><span class="badge-tag tag-warn">TIER 2 PRIORITY</span></td>
+                <td>Rajesh Mehta, CEng (India)</td>
+                <td>Submerged Pier Scour Sonar Audit</td>
+                <td>Within 48 Hours</td>
+                <td><span class="badge-tag tag-warn">SCHEDULED</span></td>
+                <td><button class="tool-btn small btn-open-wo-modal">View Order</button></td>
+              </tr>
+              <tr data-wo-id="WO-INFRAGUARD-2026-0409" data-asset="Chenab Rail Arch Viaduct Pier #3, Reasi J&amp;K (NY-DOT-OV-409)" data-gps="33.1522° N, 74.8837° E" data-tech="Dr. Siddharth Kaul, FIE" data-time="2026-11-22 16:45:00 IST" data-protocol="Perform Seismic Zone V Expansion Joint Deflection Verification and close-range drone photogrammetry crack mapping.">
+                <td class="font-mono">WO-INFRAGUARD-2026-0409</td>
+                <td><strong>Chenab Rail Arch Viaduct Pier #3, Reasi (J&amp;K)</strong><br><span class="sub-cell">Northern Railway USBRL • Zone V</span></td>
+                <td><span class="badge-tag tag-good">ROUTINE NDT</span></td>
+                <td>Dr. Siddharth Kaul, FIE</td>
+                <td>Seismic Zone V Joint Verification</td>
+                <td>Next Bi-Weekly Cycle</td>
+                <td><span class="badge-tag tag-good">MONITORING</span></td>
+                <td><button class="tool-btn small btn-open-wo-modal">View Order</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PAGE 6: EXPLAINABLE ENGINEERING (XAI) REPORTS & AUDIT TRAIL
+         ====================================================================== -->
+    <section id="page-reports" class="app-page">
+      <div class="page-container">
+        <div class="section-banner">
+          <div>
+            <h2>Explainable Engineering (XAI) Compliance &amp; Audit Center (India)</h2>
+            <p>Plain-English structural notices citing BIS IS 456:2000, IRC:112-2020, IRC:6 Class 70R, and MoRTH IBMS ratings</p>
+          </div>
+          <div class="banner-controls">
+            <button id="btn-open-certificate" class="nav-btn btn-dispatch-action">Official MoRTH / NHAI Certificate</button>
+            <button id="btn-print-report" class="nav-btn ghost-btn" onclick="window.print()">Print Report</button>
+            <button id="btn-export-csv" class="nav-btn ghost-btn">Export CSV</button>
+            <button id="btn-export-json" class="nav-btn ghost-btn">Export JSON</button>
+          </div>
+        </div>
+
+        <div class="reports-grid">
+          <!-- XAI ALERTS FEED -->
+          <div class="glass-card reports-feed-card">
+            <div class="card-title-bar">
+              <h4>Active Explainable Engineering (XAI) Notices</h4>
+              <span id="alert-count-pill" class="badge-tag tag-red">1 NOTICE</span>
+            </div>
+            <div id="alerts-container" class="alerts-scroll-list expanded">
+              <!-- Dynamically populated alerts -->
+            </div>
+          </div>
+
+          <!-- REGULATORY CITATIONS BREAKDOWN -->
+          <div class="glass-card compliance-specs-card">
+            <div class="card-title-bar">
+              <h4>Indian Regulatory Framework &amp; Standards Reference</h4>
+              <span class="badge-tag tag-cyan">BIS IS 456 • IRC:112 • MoRTH IBMS</span>
+            </div>
+            <div class="specs-body">
+              <div class="spec-item">
+                <strong class="spec-code">IS 456:2000 &amp; IRC:112-2020</strong>
+                <span class="spec-name">BIS &amp; Indian Roads Congress Concrete Bridge Crack Control</span>
+                <p>Establishes maximum allowable surface crack widths for Indian highway and marine bridges: 0.20mm in severe coastal/monsoon exposure (Mumbai/Konkan), 0.30mm in moderate ambient exposure.</p>
+              </div>
+              <div class="spec-item">
+                <strong class="spec-code">IRC:6-2017 (Class 70R / AA) L/800</strong>
+                <span class="spec-name">Live-Load Deflection Limit for National Highway Bridges</span>
+                <p>Maximum permissible dynamic deflection under Indian Class 70R tracked/wheeled loading: Δ<sub>allowable</sub> = L / 800 = 120m / 800 = 150.0 mm.</p>
+              </div>
+              <div class="spec-item">
+                <strong class="spec-code">MoRTH / NHAI IBMS &amp; IRC:SP:37</strong>
+                <span class="spec-name">Indian Bridge Management System Structural Distress Rating</span>
+                <p>Evaluates bridge deck, superstructure, and pier scour post-monsoon. Distress ratings requiring Tier-1 intervention mandate immediate axle load restriction or CFRP strengthening per IRC:SP:40.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SQLITE PERSISTENT TELEMETRY AUDIT TRAIL TABLE -->
+        <div class="glass-card work-orders-table-card">
+          <div class="card-title-bar">
+            <div>
+              <h4>SQLite Persistent Telemetry & Simulation Audit Log (shm_records.db)</h4>
+              <span class="sub-label">Immutable timestamped records of structural telemetry, modal strain, and Paris' Law RUL predictions</span>
+            </div>
+            <button id="btn-refresh-history" class="tool-btn small">Refresh Log</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>RECORD ID</th>
+                <th>TIMESTAMP (UTC)</th>
+                <th>SENSOR NODE</th>
+                <th>FBG STRAIN (με)</th>
+                <th>3D SAG (mm)</th>
+                <th>CRACK (mm)</th>
+                <th>SHI SCORE</th>
+                <th>RUL (DAYS)</th>
+                <th>LSTM MSE</th>
+              </tr>
+            </thead>
+            <tbody id="sqlite-history-tbody">
+              <!-- Dynamically populated from /api/history/telemetry -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    </div> <!-- END .app-main-workspace -->
+
+    <!-- ======================================================================
+         MODALS (AUTH & PHONE OTP, OFFICIAL WORK ORDER, GIS MAP)
+         ====================================================================== -->
+
+    <!-- FULL-SCREEN ENTERPRISE LOGIN & PHONE 2FA ONBOARDING PORTAL -->
+    <div id="auth-modal" class="modal-overlay auth-portal-overlay hidden">
+      <div class="auth-portal-split">
+        <!-- LEFT SHOWCASE PANEL -->
+        <div class="auth-portal-hero">
+          <div class="aph-top">
+            <div class="brand">
+              <div class="brand-shield">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <path d="M9 12l2 2 4-4"></path>
+                </svg>
+              </div>
+              <div class="brand-info">
+                <span class="brand-title" style="font-size:18px;">InfraGuard Enterprise</span>
+                <span class="brand-subtitle">Autonomous Structural Integrity &amp; Digital Twin Platform</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="aph-body">
+            <h2>Multi-Modal Civil Infrastructure Command Center</h2>
+            <p>Fusing Drone Computer Vision (YOLOv8-seg), Open3D LiDAR Point Cloud ICP, 200 Hz PyTorch LSTM Vibration Telemetry, and Paris' Law Fracture Mechanics.</p>
+            <div class="aph-pillars">
+              <div class="aph-pillar"><strong>Sensor Trust Guard</strong><span>Hardware fault quarantine prevents false bridge closures.</span></div>
+              <div class="aph-pillar"><strong>Cross-Check Matrix</strong><span>Distinguishes harmless surface fissures from silent structural fatigue.</span></div>
+              <div class="aph-pillar"><strong>Paris' Law RUL &amp; CFRP</strong><span>Physics-informed remaining life forecasting with retrofit simulation.</span></div>
+            </div>
+          </div>
+
+          <div class="aph-footer">
+            <span>IS 456:2000 • IRC:112 • MoRTH / NHAI IBMS Compliant</span>
+            <span>256-Bit SHA-256 + TRAI DLT Mobile SMS OTP 2FA (+91)</span>
+          </div>
+        </div>
+
+        <!-- RIGHT AUTHENTICATION PANEL -->
+        <div class="modal-dialog auth-dialog auth-portal-card">
+          <div class="modal-header">
+            <div class="modal-title-group">
+              <h3>NHAI / MoRTH Engineer Portal Sign-In &amp; +91 Phone 2FA</h3>
+            </div>
+            <button id="btn-close-auth" class="tool-btn">Continue to Workspace →</button>
+          </div>
+
+        <div class="modal-body auth-body">
+          <!-- AUTH TABS: LOGIN VS REGISTER -->
+          <div class="auth-tabs">
+            <button id="auth-tab-login" class="auth-tab-btn active">Sign In</button>
+            <button id="auth-tab-register" class="auth-tab-btn">Register New Engineer</button>
+          </div>
+
+          <!-- 1-CLICK DEMO ACCOUNTS FOR JUDGES -->
+          <div class="demo-accounts-strip">
+            <span class="da-label">1-Click Indian Evaluator Accounts:</span>
+            <div class="da-buttons">
+              <button class="btn-demo-acct" data-email="engineer@infraguard.ai" data-pwd="InfraGuard@2026">
+                Dr. Rajesh Iyer (NHAI Chief Engineer)
+              </button>
+              <button class="btn-demo-acct" data-email="inspector@infraguard.ai" data-pwd="InfraGuard@2026">
+                V. Deshmukh (CSIR-SERC NDT Lead)
+              </button>
+              <button class="btn-demo-acct" data-email="director@infraguard.ai" data-pwd="InfraGuard@2026">
+                Ananya Sharma, IAS (MoRTH Director)
+              </button>
+            </div>
+          </div>
+
+          <!-- LOGIN FORM -->
+          <form id="form-login" class="auth-form">
+            <div class="form-row">
+              <label>Official Email or Indian Mobile Number (+91)</label>
+              <input type="text" id="login-email-phone" placeholder="e.g. engineer@infraguard.ai or +91-98201-88420" value="engineer@infraguard.ai" required>
+            </div>
+            <div class="form-row">
+              <label>Password</label>
+              <input type="password" id="login-password" placeholder="••••••••" value="InfraGuard@2026" required>
+            </div>
+            <div style="display:flex; gap:8px; margin-top:4px;">
+              <button type="submit" class="btn-submit-auth" style="flex:1;">Sign In with Password</button>
+              <button type="button" id="btn-login-send-otp" class="tool-btn" style="padding:9px 12px;">Login via +91 Phone SMS OTP</button>
+            </div>
+          </form>
+
+          <!-- REGISTER FORM -->
+          <form id="form-register" class="auth-form hidden">
+            <div class="form-row">
+              <label>Full Name</label>
+              <input type="text" id="reg-name" placeholder="Er. Karthik Subramanian, FIE" required>
+            </div>
+            <div class="form-row">
+              <label>Official Work Email</label>
+              <input type="email" id="reg-email" placeholder="karthik@nhai.gov.in" required>
+            </div>
+            <div class="form-row">
+              <label>Indian Mobile Number (For 2FA SMS OTP)</label>
+              <input type="tel" id="reg-phone" placeholder="+91-98201-56789" value="+91-98201-56789" required>
+            </div>
+            <div class="form-row">
+              <label>Engineering Designation</label>
+              <select id="reg-role" class="dark-select">
+                <option value="NHAI Chief Structural Engineer">NHAI Chief Structural Engineer</option>
+                <option value="CSIR-SERC Senior NDT Inspector">CSIR-SERC Senior NDT Inspector</option>
+                <option value="MSRDC Bridge Maintenance Engineer">MSRDC Bridge Maintenance Engineer</option>
+                <option value="MoRTH Infrastructure Director">MoRTH Infrastructure Director</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Password</label>
+              <input type="password" id="reg-password" placeholder="••••••••" value="InfraGuard@2026" required>
+            </div>
+            <button type="submit" class="btn-submit-auth">Send +91 Mobile Verification OTP</button>
+          </form>
+
+          <!-- PHONE OTP VERIFICATION SECTION -->
+          <div id="otp-verify-section" class="otp-box hidden">
+            <div class="otp-header">
+              <h4>Enter 6-Digit TRAI DLT Verification Code</h4>
+              <span id="otp-phone-display" class="otp-phone-sub">Code sent to: +91-98201-88420</span>
+            </div>
+
+            <!-- SIMULATED PHONE SMS NOTIFICATION BANNER -->
+            <div class="sms-simulation-toast">
+              <div class="sms-toast-top">
+                <span class="sms-app-badge">IND-SMS GATEWAY • NOW</span>
+                <span class="sms-sender">VM-INFRAG (NHAI-SEC)</span>
+              </div>
+              <p id="sms-toast-text" class="sms-toast-body">[INFRAGUARD INDIA] Your 2FA authentication OTP is 849201. Valid for 10 minutes.</p>
+            </div>
+
+            <div class="otp-inputs-row">
+              <input type="text" id="otp-input-field" maxlength="6" placeholder="849201" class="otp-field">
+              <button id="btn-submit-otp" class="btn-verify-otp">Verify &amp; Sign In</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- OFFICIAL FIELD DISPATCH ORDER MODAL -->
+    <div id="dispatch-modal" class="modal-overlay hidden">
+      <div class="modal-dialog dispatch-dialog">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <h3>OFFICIAL FIELD WORK ORDER // INFRAGUARD</h3>
+          </div>
+          <button id="btn-close-dispatch-modal" class="tool-btn">CLOSE</button>
+        </div>
+        <div class="modal-body dispatch-order-sheet">
+          <div class="order-header-stamp">
+            <div>
+              <h2>STATE HIGHWAY EMERGENCY REPAIR DISPATCH</h2>
+              <span id="wo-id-display">WORK ORDER: WO-INFRAGUARD-2026-8842</span>
+            </div>
+            <span class="official-seal">PRIORITY #1</span>
+          </div>
+          <div class="order-grid">
+            <div><strong>Asset:</strong> <span id="wo-asset">Golden Gate Suspension Span (CA-DOT-BR-8842)</span></div>
+            <div><strong>GPS Coordinates:</strong> <span id="wo-gps">37.8199° N, 122.4783° W</span></div>
+            <div><strong>Lead Inspector:</strong> <span id="wo-tech">Marcus Vance, NDT Level III</span></div>
+            <div><strong>Dispatched At:</strong> <span id="wo-timestamp">2026-11-21 14:30:00 UTC</span></div>
+          </div>
+          <div class="order-protocol-box">
+            <h4>MANDATORY FIELD NDT PROTOCOL:</h4>
+            <p id="wo-protocol-text">Deploy Phased Array Ultrasonic Testing (PAUT) across midspan tension flange welds. Calibrate drone LiDAR point clouds to measure vertical girder sag deflection against AASHTO L/800 limits.</p>
+          </div>
+          <div class="order-actions-bar">
+            <button class="tool-btn" onclick="window.print()">PRINT WORK ORDER</button>
+            <span class="order-status-badge">STATUS: CREW EN ROUTE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GIS GEO-MAP MODAL -->
+    <div id="geo-modal" class="modal-overlay hidden">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <h3>REGIONAL GIS INFRASTRUCTURE GEO-MAP</h3>
+          </div>
+          <button id="btn-close-geo" class="tool-btn">CLOSE</button>
+        </div>
+        <div class="modal-body">
+          <div class="geo-modal-body">
+            <div class="geo-map-container">
+              <canvas id="modal-gis-canvas" width="520" height="280"></canvas>
+              <div class="geo-marker pin-deck" title="Midspan Deck Flexural Anomaly">
+                <span class="marker-pulse"></span>
+                <span class="marker-label">Span A-B (Sag: 18.4mm)</span>
+              </div>
+              <div class="geo-marker pin-pier2" title="Pier #2 Shear Microstrain">
+                <span class="marker-pulse"></span>
+                <span class="marker-label">Pier #2 (Tilt: 0.12°)</span>
+              </div>
+              <div class="geo-marker pin-pier3" title="Pier #3 Base Scour">
+                <span class="marker-pulse"></span>
+                <span class="marker-label">Pier #3 (Scour: 0.4m)</span>
+              </div>
+            </div>
+            <div class="geo-info-sidebar">
+              <h4>Geotechnical Metadata</h4>
+              <ul>
+                <li><strong>Asset ID:</strong> CA-DOT-BR-8842</li>
+                <li><strong>GPS:</strong> 37.8199° N, 122.4783° W</li>
+                <li><strong>Seismic Zone:</strong> High (San Andreas Fault 4.2 km)</li>
+                <li><strong>Soil Classification:</strong> Hard Marine Sandstone / Franciscan Bedrock</li>
+                <li><strong>Design Load:</strong> AASHTO HL-93 Standard Truck</li>
+                <li><strong>Sensor Network:</strong> 64 Multi-Modal IoT Nodes (Fiber Optic + Tri-axial MEMS)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OFFICIAL MoRTH / NHAI STRUCTURAL INTEGRITY CERTIFICATE MODAL -->
+    <div id="certificate-modal" class="modal-overlay hidden">
+      <div class="modal-dialog certificate-dialog">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <h3>OFFICIAL MoRTH / NHAI STRUCTURAL INTEGRITY CERTIFICATE (INDIA)</h3>
+          </div>
+          <button id="btn-close-certificate" class="tool-btn">CLOSE</button>
+        </div>
+        <div class="modal-body certificate-sheet">
+          <div class="cert-top-header">
+            <div>
+              <span class="cert-agency">GOVERNMENT OF INDIA • MINISTRY OF ROAD TRANSPORT &amp; HIGHWAYS (MoRTH) • NHAI IBMS</span>
+              <h2>CERTIFICATE OF AUTONOMOUS STRUCTURAL INTEGRITY &amp; IRC COMPLIANCE</h2>
+              <span id="cert-serial" class="font-mono">CERT-ID: INFRAGUARD-NHAI-2026-8842</span>
+            </div>
+            <div class="cert-qr-box" title="Cryptographic Audit Verification Matrix">
+              <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.6">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                <rect x="5" y="5" width="3" height="3" fill="#38BDF8"/><rect x="16" y="5" width="3" height="3" fill="#38BDF8"/><rect x="5" y="16" width="3" height="3" fill="#38BDF8"/>
+                <path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 19h2v2h-2zM19 14h2v2h-2z"/>
+              </svg>
+              <span>VERIFIED</span>
+            </div>
+          </div>
+
+          <div class="order-grid cert-meta-grid">
+            <div><strong>Structure ID:</strong> <span id="cert-asset">Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai</span></div>
+            <div><strong>Inspection Date:</strong> <span id="cert-date">2026-11-23 IST</span></div>
+            <div><strong>Structural Health Index:</strong> <span id="cert-shi" class="color-good">94.2 / 100 (MoRTH IBMS Rating 8)</span></div>
+            <div><strong>Paris' Law Fatigue RUL:</strong> <span id="cert-rul">6,387 Days (17.5 Years)</span></div>
+            <div><strong>3D LiDAR ICP Deflection:</strong> <span id="cert-sag">-18.4 mm (12.3% of IRC:112 L/800)</span></div>
+            <div><strong>Sensor Trust Fleet Score:</strong> <span id="cert-trust" class="color-good">98.4% Verified Hardware</span></div>
+          </div>
+
+          <div class="order-protocol-box">
+            <h4>CROSS-MODAL COMPLIANCE &amp; CERTIFICATION FINDING (IS 456 / IRC:112 / IRC:SP:37):</h4>
+            <p id="cert-finding-text">Multi-modal fusion of YOLOv8-seg drone photogrammetry, Open3D ICP LiDAR point clouds, and 200 Hz PyTorch LSTM vibration telemetry confirms structural compliance with BIS IS 456:2000, IRC:112-2020, IRC:6 Class 70R L/800, and MoRTH / NHAI IBMS criteria.</p>
+          </div>
+
+          <div class="cert-signature-row">
+            <div class="cert-sig-block">
+              <span class="sig-script">Dr. Rajesh Iyer, FIE, CEng</span>
+              <span class="sig-line"></span>
+              <span id="cert-signatory" class="sig-sub">Dr. Rajesh Iyer, FIE, CEng (India) • Chief Structural Engineer (IEI Reg #F-118421-IN)</span>
+            </div>
+            <div class="cert-hash-block">
+              <span class="font-mono">SHA-256 TELEMETRY AUDIT HASH:</span>
+              <code id="cert-hash">9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08</code>
+            </div>
+          </div>
+
+          <div class="order-actions-bar">
+            <button class="btn-dispatch-action" onclick="window.print()">PRINT / SAVE SIGNED PDF CERTIFICATE</button>
+            <span class="order-status-badge">MoRTH / IRC COMPLIANT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOATING AI STRUCTURAL CO-PILOT & VOICE ASSISTANT BUTTON & DRAWER -->
+    <button id="copilot-fab" class="copilot-fab" title="Open Voice &amp; AI Structural Assistant">
+      <span class="fab-dot"></span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+      </svg>
+      <span>Voice &amp; AI Assistant</span>
+    </button>
+
+    <aside id="copilot-drawer" class="copilot-drawer hidden">
+      <div class="cp-header">
+        <div>
+          <h4>INFRAGUARD Voice &amp; AI Assistant</h4>
+          <span class="sub-label">Two-Way Voice Recognition &amp; Speech Synthesis Active</span>
+        </div>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <button id="btn-copilot-speak-last" class="tool-btn small active" title="Speak Current Structural Status Out Loud">Speak Status</button>
+          <button id="btn-close-copilot" class="tool-btn small">CLOSE</button>
+        </div>
+      </div>
+
+      <div class="cp-prompts">
+        <button class="cp-chip" data-q="Why is this structure ranked #1 in priority?">Why Ranked #1?</button>
+        <button class="cp-chip" data-q="Compare CFRP Retrofit vs Do-Nothing RUL">CFRP Retrofit ROI</button>
+        <button class="cp-chip" data-q="Draft an official FHWA emergency directive memo">Draft FHWA Memo</button>
+        <button class="cp-chip" data-q="Explain Sensor Trust Guard hardware fault isolation">Sensor Trust Guard</button>
+      </div>
+
+      <div id="copilot-messages" class="cp-messages">
+        <div class="cp-msg cp-bot">
+          <strong>INFRAGUARD Voice &amp; AI Assistant:</strong> Voice synthesis is active. Click the <strong>Mic</strong> button below to speak a voice command, click <strong>Speak Status</strong> above to hear a live vocal briefing, or select any engineering prompt.
+        </div>
+      </div>
+
+      <form id="copilot-form" class="cp-input-row">
+        <button type="button" id="btn-copilot-mic" class="tool-btn" title="Click and Speak into Microphone">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          </svg>
+          <span id="mic-btn-label">Mic</span>
+        </button>
+        <input type="text" id="copilot-input" placeholder="Type or click Mic to ask by voice..." required>
+        <button type="submit" class="tool-btn active">Ask</button>
+      </form>
+    </aside>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

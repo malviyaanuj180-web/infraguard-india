@@ -1,0 +1,74 @@
+[
+  {
+    "id": "beacon-span-ab",
+    "name": "Span A-B Deck (Midspan)",
+    "position": [
+      0.0,
+      1.8,
+      0.0
+    ],
+    "component": "Bridge Superstructure Deck",
+    "criticality": "HIGH",
+    "sensor_type": "Tri-Axial Accel + Optical Displacement",
+    "active_defects": [
+      "Flexural Tension Cracking (1.42mm)",
+      "Mid-span Sag (48.2mm)"
+    ],
+    "inspection_focus": "Tensile stress re-distribution and fatigue cycle count",
+    "coordinates_gps": "37.8199\u00b0 N, 122.4783\u00b0 W"
+  },
+  {
+    "id": "beacon-pier-2",
+    "name": "Pier #2 Mid-Column",
+    "position": [
+      20.0,
+      -12.0,
+      0.0
+    ],
+    "component": "Substructure Concrete Column",
+    "criticality": "MEDIUM",
+    "sensor_type": "Tiltmeter & Ultrasonic Transducer",
+    "active_defects": [
+      "Delamination Spalling",
+      "Lateral Drift (14.5mm)"
+    ],
+    "inspection_focus": "Shear cracking and seismic displacement envelope",
+    "coordinates_gps": "37.8204\u00b0 N, 122.4779\u00b0 W"
+  },
+  {
+    "id": "beacon-pier-3",
+    "name": "Pier #3 Base Joint",
+    "position": [
+      -20.0,
+      -25.0,
+      0.0
+    ],
+    "component": "Submerged Foundation Caisson",
+    "criticality": "CRITICAL",
+    "sensor_type": "Piezometer & Acoustic Emission Sensor",
+    "active_defects": [
+      "Marine Scour Cavitation",
+      "Chloride Attack Corrosion"
+    ],
+    "inspection_focus": "Tidal scour and pile cap integrity",
+    "coordinates_gps": "37.8192\u00b0 N, 122.4788\u00b0 W"
+  },
+  {
+    "id": "beacon-cable-east",
+    "name": "East Cable Anchor",
+    "position": [
+      42.0,
+      2.5,
+      6.0
+    ],
+    "component": "Post-Tensioned Stay Cable Anchor",
+    "criticality": "MEDIUM",
+    "sensor_type": "Fiber-Optic FBG Strain Gauge",
+    "active_defects": [
+      "Fretting Wear",
+      "Anchor Head Micro-Fissures"
+    ],
+    "inspection_focus": "Tendon tension loss and wind-induced vortex vibration",
+    "coordinates_gps": "37.8211\u00b0 N, 122.4772\u00b0 W"
+  }
+]

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUSTAINOVA 2026 Ideathon — InfraGuard India Presentation Deck | Team Byte Busters</title>
+  <style>
+    :root {
+      --bg-dark: #09131c;
+      --panel-bg: #10212f;
+      --teal-accent: #2c6e6a;
+      --navy-accent: #0b5ba8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --gold: #f59e0b;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #132a3e 0%, #071018 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    /* Top Navigation Bar */
+    .deck-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(16, 33, 47, 0.92);
+      border-bottom: 1px solid rgba(44, 110, 106, 0.5);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .badge-sustainova {
+      background: linear-gradient(135deg, #0b5ba8, #2c6e6a);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .deck-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .deck-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+    }
+    .btn-pptx {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+    }
+    .btn-pptx:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+    .btn-pdf {
+      background: linear-gradient(135deg, #0b5ba8, #054a76);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(11, 91, 168, 0.35);
+    }
+    .btn-pdf:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.07);
+      color: #e2e8f0;
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    /* Main Stage Layout */
+    .stage-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 250px 1fr 310px;
+      gap: 18px;
+      padding: 18px 24px;
+      max-width: 1840px;
+      width: 100%;
+      margin: 0 auto;
+      align-items: start;
+    }
+    @media (max-width: 1280px) {
+      .stage-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Slide Thumbnails */
+    .thumbs-sidebar {
+      background: rgba(16, 33, 47, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .thumb-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      padding: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .thumb-card:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+    .thumb-card.active {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+    }
+    .thumb-card img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+    }
+    .thumb-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Center Slide Canvas */
+    .slide-viewport {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .slide-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.65);
+      border: 2px solid rgba(56, 189, 248, 0.3);
+      position: relative;
+    }
+    .slide-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .slide-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: rgba(16, 33, 47, 0.85);
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .slide-counter {
+      font-weight: 700;
+      font-size: 0.92rem;
+      min-width: 110px;
+      text-align: center;
+      color: #38bdf8;
+    }
+
+    /* Right Speaker Pitch Notes */
+    .notes-sidebar {
+      background: rgba(16, 33, 47, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .notes-header {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #38bdf8;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px;
+    }
+    .notes-slide-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .notes-body {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #cbd5e1;
+      background: rgba(0, 0, 0, 0.24);
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 3px solid #2c6e6a;
+    }
+    .key-highlights {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.81rem;
+      color: #e2e8f0;
+    }
+    .key-highlights li {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 10px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header class="deck-topbar">
+    <div class="brand-group">
+      <span class="badge-sustainova">SUSTAINOVA 2026 IDEATHON</span>
+      <div>
+        <div class="deck-title">InfraGuard India — Team Byte Busters (AITR Indore)</div>
+        <div class="deck-subtitle">Anuj Malviya • Aayushi Gundegaonkar • Sakshi Jain | SDG 9: Industry, Innovation &amp; Infrastructure</div>
+      </div>
+    </div>
+    <div class="action-group">
+      <a href="/INFRAGUARD_SUSTAINOVA_2026_PPT.pptx" download="INFRAGUARD_SUSTAINOVA_2026_PPT.pptx" class="btn btn-pptx">
+        ⬇ Download Editable .PPTX
+      </a>
+      <a href="/INFRAGUARD_SUSTAINOVA_2026_FINAL.pdf" download="INFRAGUARD_SUSTAINOVA_2026_FINAL.pdf" class="btn btn-pdf">
+        ⬇ Download High-Res .PDF
+      </a>
+      <button class="btn btn-outline" onclick="toggleFullscreen()">⛶ Fullscreen Pitch</button>
+      <a href="/" class="btn btn-outline">🚀 Open Live InfraGuard App</a>
+    </div>
+  </header>
+
+  <main class="stage-container">
+    <!-- Left Slide Thumbnails -->
+    <aside class="thumbs-sidebar" id="thumbs-list"></aside>
+
+    <!-- Center Main Slide Viewer -->
+    <section class="slide-viewport">
+      <div class="slide-frame" id="slide-frame">
+        <img id="current-slide-img" src="/ppt_assets/ref_matched_slides/slide_1.png?v=5" alt="Slide 1" />
+      </div>
+      <div class="slide-controls">
+        <button class="btn btn-outline" onclick="prevSlide()">◀ Prev</button>
+        <div class="slide-counter" id="slide-counter">Slide 1 / 8</div>
+        <button class="btn btn-outline" onclick="nextSlide()">Next ▶</button>
+      </div>
+    </section>
+
+    <!-- Right Judge Pitch Script & Highlights -->
+    <aside class="notes-sidebar">
+      <div class="notes-header">🎙️ Judge Pitch Script &amp; Key Points</div>
+      <div class="notes-slide-title" id="notes-title">Slide 1: Title Cover</div>
+      <div class="notes-body" id="notes-script"></div>
+      <div class="notes-header">✨ Visual Infographics on This Slide</div>
+      <ul class="key-highlights" id="notes-bullets"></ul>
+    </aside>
+  </main>
+
+  <script>
+    const SLIDES = [
+      {
+        num: 1,
+        title: "SUSTAINOVA 2026 Official Cover",
+        img: "/ppt_assets/ref_matched_slides/slide_1.png?v=5",
+        script: "Good morning judges! We are Team Byte Busters from Acropolis Institute of Technology & Research, Indore. Today we present InfraGuard India — our autonomous 3D Finite-Element Digital Twin and AI Structural Health Monitoring platform under SDG 9.",
+        bullets: [
+          "Official SUSTAINOVA 2026 Ideathon Cover",
+          "Project: Infra Guard | Team Byte Busters",
+          "Acropolis Institute of Technology & Research, Indore"
+        ]
+      },
+      {
+        num: 2,
+        title: "Team Description & Domain",
+        img: "/ppt_assets/ref_matched_slides/slide_2.png?v=5",
+        script: "Our interdisciplinary team combines 3D Finite-Element physics modeling, sub-millimeter computer vision, and 200 Hz IoT telemetry: Anuj Malviya leads full-stack architecture & the 3D FEA Digital Twin; Aayushi Gundegaonkar leads OpenCV/YOLOv8 crack vision & Paris' Law RUL prognostics; and Sakshi Jain leads 200 Hz IoT sensor fusion & BIS/IRC standards compliance.",
+        bullets: [
+          "Teal-framed portraits matching reference template",
+          "Role & technical ownership badges for each member",
+          "Domain: SDG 9 – Industry, Innovation & Infrastructure"
+        ]
+      },
+      {
+        num: 3,
+        title: "Problem Statement & Real World Impact",
+        img: "/ppt_assets/ref_matched_slides/slide_3.png?v=5",
+        script: "Are India's bridges safe right now? Over 2,130 National Highway bridges are distressed. Manual biennial visual checks miss 78% of early micro-cracks under sea-link girders, while isolated IoT gauges cannot predict Remaining Useful Life before rebar yields at 420 MPa.",
+        bullets: [
+          "Visual Question-Mark Hazard Callout (5.04mm Crack)",
+          "6 Indian Stakeholder Challenge rows (NHAI, MoRTH, MSRDC, Railways)",
+          "6 Technology-Driven Solution Icons + 5 Quantified Impact stats"
+        ]
+      },
+      {
+        num: 4,
+        title: "Proposed Solution & Innovation Hub",
+        img: "/ppt_assets/ref_matched_slides/slide_4.png?v=5",
+        script: "InfraGuard unifies sub-millimeter AI Crack Vision (0.25mm/px), 200 Hz MEMS+FBG sensor fusion, a live 3D Von Mises FEA Stress Digital Twin, and a Hindi/English Voice Co-Pilot into a single 6-step autonomous command pipeline.",
+        bullets: [
+          "Left: What is InfraGuard? + 4-Node Radial 'Why InfraGuard?' diagram",
+          "Center: 6-Node Circular Orbiting Hub around InfraGuard Core",
+          "Right: 6-Step Vertical Numbered Solution Overview Flowchart"
+        ]
+      },
+      {
+        num: 5,
+        title: "Tech Stack & 6-Layer System Architecture",
+        img: "/ppt_assets/ref_matched_slides/slide_5.png?v=5",
+        script: "On the left is our 6-pillar production stack: Three.js WebGL FEA mesh, Paris' Law & LSTM Autoencoder AI, OpenCV/YOLOv8 + Open3D ICP LiDAR, FastAPI 200 Hz WebSockets, SHA-256 + +91 SMS OTP 2FA, and BIS IS 456 / IRC:112 compliance. On the right is our 6-layer system architecture.",
+        bullets: [
+          "Left: 2x3 Categorized Pastel Tech Stack Cards with vector icons",
+          "Right: 6 Horizontal Layered System Architecture Stack",
+          "Bottom: 5-Stage End-to-End Telemetry-to-Certificate Pipeline"
+        ]
+      },
+      {
+        num: 6,
+        title: "Feasibility, Viability & Future Roadmap",
+        img: "/ppt_assets/ref_matched_slides/slide_6.png?v=5",
+        script: "Our business model scales from Phase 1 B2G pilots with NHAI, MoRTH & MSRDC (at ₹1.8L per span, 80% cheaper than legacy SHM) to Phase 2 SaaS licensing (₹2.4L/yr per bridge). Our future roadmap integrates Autonomous Swarm Drone Docks and ISRO NISAR Satellite InSAR fusion.",
+        bullets: [
+          "Left: Phase 1 Pilot & Phase 2 Commercialization Business/Revenue Cards",
+          "Center: 10 Feasibility & Scalability rows + 5-Star Viability Matrix",
+          "Right: 6 Icon-backed Future Scope milestones (ISRO NISAR, WIM, Drone Docks)"
+        ]
+      },
+      {
+        num: 7,
+        title: "SDG Alignment & Sustainability Impact",
+        img: "/ppt_assets/ref_matched_slides/slide_7.png?v=5",
+        script: "InfraGuard directly advances SDG 9 (Primary), SDG 11 (Safe Public Transit), and SDG 12 & 13 (Climate Resilience). By catching cracks at 0.30 mm and applying targeted CFRP retrofits, we extend bridge lifespan by +35% and cut embodied CO2 emissions by 60% compared to demolition and reconstruction.",
+        bullets: [
+          "Top: 3 Official UN SDG Cards (SDG 9, SDG 11, SDG 12 & 13)",
+          "Middle: Environmental, Social & Economic Sustainability Columns",
+          "Bottom: 5 Quantified Impact Indicators (0.25mm/px, 200 Hz, +35% RUL, 68% Saved)"
+        ]
+      },
+      {
+        num: 8,
+        title: "Thank You & Live Demonstration",
+        img: "/ppt_assets/ref_matched_slides/slide_8.png?v=5",
+        script: "Thank you judges! Our full-stack InfraGuard India Enterprise Command Center is running live right now with 4 Indian National Corridors (Atal Setu Mumbai, Bandra-Worli Sea Link, Chenab Rail Arch J&K, and Signature Bridge Delhi). We welcome your questions!",
+        bullets: [
+          "Official SUSTAINOVA 2026 Thank You slide",
+          "Team Byte Busters & Acropolis Institute summary badge",
+          "1-click transition to the live InfraGuard India web application"
+        ]
+      }
+    ];
+
+    let currentIdx = 0;
+
+    function renderThumbs() {
+      const container = document.getElementById("thumbs-list");
+      container.innerHTML = SLIDES.map((s, idx) => `
+        <div class="thumb-card ${idx === currentIdx ? 'active' : ''}" onclick="goToSlide(${idx})">
+          <img src="${s.img}" alt="${s.title}" />
+          <div class="thumb-label">
+            <span>#${s.num} ${s.title.slice(0, 22)}</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function goToSlide(idx) {
+      currentIdx = (idx + SLIDES.length) % SLIDES.length;
+      const s = SLIDES[currentIdx];
+      document.getElementById("current-slide-img").src = s.img;
+      document.getElementById("slide-counter").textContent = `Slide ${s.num} / ${SLIDES.length}`;
+      document.getElementById("notes-title").textContent = `Slide ${s.num}: ${s.title}`;
+      document.getElementById("notes-script").textContent = s.script;
+      document.getElementById("notes-bullets").innerHTML = s.bullets.map(b => `<li>✔ ${b}</li>`).join("");
+      renderThumbs();
+    }
+
+    function nextSlide() { goToSlide(currentIdx + 1); }
+    function prevSlide() { goToSlide(currentIdx - 1); }
+
+    function toggleFullscreen() {
+      const frame = document.getElementById("slide-frame");
+      if (!document.fullscreenElement) {
+        frame.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " ") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+    });
+
+    goToSlide(0);
+  </script>
+</body>
+</html>
