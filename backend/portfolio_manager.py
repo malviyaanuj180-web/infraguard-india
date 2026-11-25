@@ -245,8 +245,8 @@ class PortfolioManager:
 
         # Specific NDT recommendations based on typology
         if "Cable-Stayed" in asset["typology"]:
-            recommended_protocol = "Phased Array Ultrasonic Testing (PAUT) of midspan deck welds & LiDAR 3D sag verify."
-            required_gear = ["PAUT Ultrasonic Flaw Detector", "Drone RTK LiDAR Unit", "Carbon-Fiber Patching Kit"]
+            recommended_protocol = "Phased Array Ultrasonic Testing (PAUT) of midspan deck welds & 3D LiDAR sag verification."
+            required_gear = ["PAUT Ultrasonic Flaw Detector", "High-Res Optical & 3D LiDAR Scanner", "CFRP Carbon-Fiber Patching Kit"]
         elif "Viaduct" in asset["typology"]:
             recommended_protocol = "Underwater Sonar Bathymetry & Pile Pier Foundation Scour Depth Inspection."
             required_gear = ["Sub-bottom Acoustic Profiler", "Cathodic Potential Meter", "Underwater ROV"]

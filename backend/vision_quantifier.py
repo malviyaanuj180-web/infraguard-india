@@ -50,26 +50,26 @@ class VisionQuantifier:
     @staticmethod
     def classify_aci_severity(max_width_mm: float) -> Tuple[str, str, str]:
         """
-        Classifies crack severity according to ACI 224R (Control of Cracking in Concrete Structures).
+        Classifies crack severity according to BIS IS 456:2000 & IRC:112-2020 (Control of Cracking in Concrete Structures).
         :return: (Tier Name, Code/Badge, Recommended Action)
         """
         if max_width_mm < 0.3:
             return (
                 "Hairline",
                 "LOW_SEVERITY",
-                "Non-structural superficial fissure (<0.3mm). Routine quarterly visual monitoring."
+                "Non-structural superficial fissure (<0.30mm). Compliant with BIS IS 456:2000. Routine quarterly monitoring."
             )
         elif 0.3 <= max_width_mm <= 1.0:
             return (
                 "Moderate",
                 "MODERATE_SEVERITY",
-                "Progressive crack (0.3–1.0mm). Risk of moisture & chloride ingress. Inspect sealants."
+                "Progressive crack (0.30–1.0mm). Exceeds IS 456:2000 exposure limit; risk of chloride ingress. Schedule epoxy sealing."
             )
         else:
             return (
                 "Critical",
                 "CRITICAL_SEVERITY",
-                "Structural breach (>1.0mm). Exceeds ACI 224R allowable limits. Immediate structural mitigation required."
+                "Structural breach (>1.0mm). Exceeds BIS IS 456:2000 & IRC:112-2020 allowable limits. Immediate CFRP structural mitigation required."
             )
 
     @staticmethod

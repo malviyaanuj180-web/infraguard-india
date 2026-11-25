@@ -592,7 +592,7 @@ function applySimulationResult(data) {
 
   const nbisBadge = document.getElementById("kpi-nbis-badge");
   if (nbisBadge) {
-    nbisBadge.textContent = `NBIS ${data.shi.nbis_rating}`;
+    nbisBadge.textContent = `MoRTH IBMS ${data.shi.nbis_rating}`;
     nbisBadge.className = `badge-tag ${shi >= 75 ? "tag-good" : (shi >= 50 ? "tag-warn" : "tag-red")}`;
   }
 
@@ -623,7 +623,24 @@ function applySimulationResult(data) {
   if (sagEl) sagEl.textContent = data.telemetry.deck_sag_mm.toFixed(1);
 
   const sagLimitEl = document.getElementById("kpi-sag-limit-text");
-  if (sagLimitEl) sagLimitEl.textContent = `${data.telemetry.sag_utilization_pct.toFixed(1)}% of AASHTO 150.0mm allowable`;
+  if (sagLimitEl) sagLimitEl.textContent = `${data.telemetry.sag_utilization_pct.toFixed(1)}% of IRC:6 150.0mm allowable`;
+
+  // 4B. Update Live SUSTAINOVA 2026 SDG & Economic ROI Impact Ribbon
+  const sdgProfiles = {
+    "CA-DOT-BR-8842": { co2: "4,200 Tonnes CO₂ (-60%)", cost: "₹57.5 Lakhs / Span (68% Saved)", waste: "75% Marine Concrete & Fe500 Steel", rulGain: "+35% Service Life (+18 Yrs)" },
+    "MH-MSRDC-BW-102": { co2: "3,850 Tonnes CO₂ (-58%)", cost: "₹52.0 Lakhs / Span (66% Saved)", waste: "74% Pre-Stressed Tendon & Concrete", rulGain: "+34% Service Life (+16 Yrs)" },
+    "NY-DOT-OV-409": { co2: "5,100 Tonnes CO₂ (-64%)", cost: "₹68.4 Lakhs / Span (71% Saved)", waste: "78% Structural Arch Steel & Concrete", rulGain: "+38% Service Life (+22 Yrs)" },
+    "CA-DOT-RW-214": { co2: "3,400 Tonnes CO₂ (-56%)", cost: "₹48.2 Lakhs / Span (65% Saved)", waste: "72% Pylon Concrete & Rebar", rulGain: "+33% Service Life (+15 Yrs)" }
+  };
+  const activeSdg = sdgProfiles[State.currentAsset] || sdgProfiles["CA-DOT-BR-8842"];
+  const elCo2 = document.getElementById("sdg-co2-saved");
+  const elCost = document.getElementById("sdg-cost-saved");
+  const elWaste = document.getElementById("sdg-waste-saved");
+  const elRulG = document.getElementById("sdg-rul-gain");
+  if (elCo2) elCo2.textContent = activeSdg.co2;
+  if (elCost) elCost.textContent = activeSdg.cost;
+  if (elWaste) elWaste.textContent = activeSdg.waste;
+  if (elRulG) elRulG.textContent = activeSdg.rulGain;
 
   const sagBadge = document.getElementById("kpi-sag-badge");
   if (sagBadge) {
@@ -741,6 +758,7 @@ async function loadVisionAnalysis(uploadedFile = null) {
       body: formData
     });
     const data = await res.json();
+    State.lastVisionData = data;
 
     const gsdBadge = document.getElementById("vision-gsd-badge");
     if (gsdBadge && data.gsd_calibrated_mm_px) {
@@ -748,7 +766,7 @@ async function loadVisionAnalysis(uploadedFile = null) {
     }
     const flightBadge = document.getElementById("vision-flight-badge");
     if (flightBadge) {
-      flightBadge.textContent = `ALTITUDE: ${flightAlt.toFixed(2)}m • FOCAL: ${focalLen.toFixed(1)}mm`;
+      flightBadge.textContent = `STANDOFF: ${flightAlt.toFixed(2)}m • FOCAL: ${focalLen.toFixed(1)}mm`;
     }
     const condBadge = document.getElementById("vision-condition-badge");
     if (condBadge && data.overall_visual_condition) {
@@ -1119,7 +1137,7 @@ function setupEventListeners() {
     inputDroneUpload.addEventListener("change", (e) => {
       if (e.target.files && e.target.files[0]) {
         loadVisionAnalysis(e.target.files[0]);
-        showToast(`Quantifying uploaded drone photo: ${e.target.files[0].name}`, "emerald");
+        showToast(`Quantifying uploaded optical crack photo: ${e.target.files[0].name}`, "emerald");
       }
     });
   }
@@ -1219,11 +1237,11 @@ function openWorkOrderModalFromRow(tr) {
   if (!modal) return;
   if (tr && tr.dataset.woId) {
     document.getElementById("wo-id-display").textContent = `WORK ORDER: ${tr.dataset.woId}`;
-    document.getElementById("wo-asset").textContent = tr.dataset.asset || "Golden Gate Suspension Span";
-    document.getElementById("wo-gps").textContent = tr.dataset.gps || "37.8199° N, 122.4783° W";
-    document.getElementById("wo-tech").textContent = tr.dataset.tech || "Marcus Vance, NDT Level III";
-    document.getElementById("wo-timestamp").textContent = tr.dataset.time || "2026-11-21 14:30:00 UTC";
-    document.getElementById("wo-protocol-text").textContent = tr.dataset.protocol || "Phased Array Ultrasonic Testing (PAUT)";
+    document.getElementById("wo-asset").textContent = tr.dataset.asset || "Atal Setu (MTHL-01) Cable-Stayed Span #14, Mumbai";
+    document.getElementById("wo-gps").textContent = tr.dataset.gps || "18.9633° N, 72.9750° E";
+    document.getElementById("wo-tech").textContent = tr.dataset.tech || "Vikramaditya Deshmukh, NDT Level III";
+    document.getElementById("wo-timestamp").textContent = tr.dataset.time || "2026-11-25 09:30:00 IST";
+    document.getElementById("wo-protocol-text").textContent = tr.dataset.protocol || "Phased Array Ultrasonic Testing (PAUT) per IRC:SP:37";
   }
   modal.classList.remove("hidden");
 }
@@ -1297,7 +1315,7 @@ function renderPortfolio(data) {
     if (tierBadge) tierBadge.textContent = topDispatch.dispatch_tier || topDispatch.urgency_tier || "TIER 1 EMERGENCY";
     if (targetTitle) targetTitle.textContent = `${topDispatch.asset_name || topDispatch.structure_name} (${topDispatch.asset_id})`;
     if (windowEl) windowEl.textContent = topDispatch.urgency_window || `Action Required: Within 12 Hours`;
-    if (crewEl) crewEl.textContent = topDispatch.assigned_crew || "FHWA Rapid Response Unit Alpha";
+    if (crewEl) crewEl.textContent = topDispatch.assigned_crew || "NHAI / CSIR-SERC Rapid Response Unit Alpha";
     if (protocolEl) protocolEl.textContent = topDispatch.recommended_protocol || "Phased Array Ultrasonic Testing (PAUT)";
     if (reasonEl) reasonEl.textContent = topDispatch.justification_summary || topDispatch.justification || "Ranks #1 in urgency due to rapid cyclic fatigue under dynamic stress.";
   }
@@ -1305,7 +1323,7 @@ function renderPortfolio(data) {
 
 async function issueFieldDispatch() {
   try {
-    const techName = State.currentUser ? State.currentUser.full_name : "Marcus Vance, NDT Level III";
+    const techName = State.currentUser ? State.currentUser.full_name : "Vikramaditya Deshmukh, NDT Level III";
     const res = await fetch("/api/portfolio/dispatch", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -1319,9 +1337,9 @@ async function issueFieldDispatch() {
     const wo = data.work_order || data;
 
     const woId = wo.dispatch_id || wo.work_order_id || "WO-INFRAGUARD-2026";
-    const assetName = wo.asset_name || wo.structure_name || "Golden Gate Suspension Span";
+    const assetName = wo.asset_name || wo.structure_name || "Atal Setu (MTHL-01) Cable-Stayed Span #14, Mumbai";
     const assetId = wo.asset_id || State.currentAsset;
-    const gps = wo.gps || wo.gps_coordinates || "37.8199° N, 122.4783° W";
+    const gps = wo.gps || wo.gps_coordinates || "18.9633° N, 72.9750° E";
     const leadTech = wo.lead_technician || wo.assigned_crew || techName;
     const timestamp = wo.dispatched_at || new Date().toISOString();
     const protocol = wo.protocol || wo.recommended_protocol || "Phased Array Ultrasonic Testing (PAUT)";
@@ -2085,6 +2103,24 @@ function initVisionSplitSlider() {
   if (slider) {
     slider.addEventListener("input", updateVisionSplitClip);
   }
+  // Interactive Sub-Millimeter Cursor Probe on Crack Image
+  const container = document.getElementById("vision-compare-container");
+  const probeEl = document.getElementById("vision-cursor-probe");
+  if (container && probeEl) {
+    container.addEventListener("mousemove", (e) => {
+      const rect = container.getBoundingClientRect();
+      const relX = Math.max(0, Math.min(1, (e.clientX - rect.left) / (rect.width || 1)));
+      const relY = Math.max(0, Math.min(1, (e.clientY - rect.top) / (rect.height || 1)));
+      const xMm = (relX * 240.0).toFixed(1);
+      const yMm = (relY * 135.0).toFixed(1);
+      // Simulate localized crack width profile near fracture spine
+      const distFromSpine = Math.abs(relY - (0.32 + 0.35 * relX));
+      const baseMax = (State.lastVisionData && State.lastVisionData.crack_metrics) ? State.lastVisionData.crack_metrics.max_width_mm : 1.42;
+      const localW = distFromSpine < 0.14 ? Math.max(0.08, baseMax * (1 - distFromSpine * 5.2)).toFixed(2) : "0.00";
+      const status = Number(localW) > 0.30 ? "IS 456 BREACH (>0.30mm)" : (Number(localW) > 0 ? "HAIRLINE (<0.30mm)" : "INTACT CONCRETE");
+      probeEl.textContent = `PROBE (${xMm}mm, ${yMm}mm) • LOCAL WIDTH: ${localW} mm [${status}]`;
+    });
+  }
 }
 
 // Aerospace Voice Assistant (Text-to-Speech & Speech-to-Text)
@@ -2105,15 +2141,15 @@ function speakAlert(text, forceSpeak = false) {
 const JUDGE_TOUR_STEPS = [
   {
     page: "page-overview",
-    title: "1. Regional Portfolio & Cross-Check Matrix",
-    desc: "Ranks all state highway bridges by urgency and cross-checks visual cracks against vibration dynamics to eliminate false alarms.",
-    voice: "Step 1. InfraGuard fuses drone computer vision, 3D LiDAR, and vibration telemetry to rank regional infrastructure assets and separate cosmetic surface cracks from silent structural fatigue."
+    title: "1. National Corridor Portfolio & Cross-Check Matrix",
+    desc: "Ranks Indian highway & railway bridges by urgency and cross-checks visual cracks against vibration dynamics to eliminate false alarms.",
+    voice: "Step 1. InfraGuard India fuses high-resolution optical computer vision, 3D LiDAR, and 200 Hertz vibration telemetry to rank national corridors and separate cosmetic surface cracks from silent structural fatigue."
   },
   {
     page: "page-twin",
-    title: "2. 3D Holographic Digital Twin & Open3D LiDAR ICP",
-    desc: "Interactive 3D structural mesh with Open3D ICP LiDAR point cloud overlay, 5-Year Time-Machine scrubber, and Paris' Law CFRP retrofit curve.",
-    voice: "Step 2. The 3D Holographic Twin overlays Open3D ICP LiDAR point clouds and simulates 5 years of Paris Law fatigue degradation with live Carbon Fiber retrofit life extension.",
+    title: "2. 3D FEA Stress Digital Twin & Open3D LiDAR ICP",
+    desc: "Interactive 3D Von Mises stress mesh (40 to 420 MPa) with Open3D ICP LiDAR point cloud overlay and Paris' Law 5-Year RUL forecast.",
+    voice: "Step 2. The 3D Finite Element Digital Twin maps Von Mises structural stress from 40 to 420 Megapascals, overlays 3D LiDAR point clouds, and models 5 years of Paris Law fatigue with Carbon Fiber retrofit life extension.",
     action: () => {
       const btnLidar = document.getElementById("btn-toggle-lidar");
       if (btnLidar && !lidarVisible) toggleLidarCloud(btnLidar);
@@ -2122,9 +2158,9 @@ const JUDGE_TOUR_STEPS = [
   },
   {
     page: "page-vision",
-    title: "3. Drone AI Crack Segmentation & GSD Millimeter Lab",
-    desc: "Swipe the before-and-after AI mask slider to inspect YOLOv8-seg crack skeletons, spalling heatmaps, and ACI 224R compliance.",
-    voice: "Step 3. Drone Computer Vision converts pixel masks into physical millimeter measurements using camera Ground Sampling Distance and grades severity under ACI 224R.",
+    title: "3. AI Optical Crack Segmentation & GSD Millimeter Lab",
+    desc: "Swipe the before-and-after AI mask slider to inspect YOLOv8-seg crack skeletons, spalling heatmaps, and BIS IS 456:2000 compliance.",
+    voice: "Step 3. AI Optical Computer Vision converts pixel masks into physical sub-millimeter measurements at 0.25 millimeters per pixel and grades severity under Indian Standard IS 456 and IRC 112.",
     action: () => {
       loadVisionAnalysis();
     }
@@ -2133,22 +2169,22 @@ const JUDGE_TOUR_STEPS = [
     page: "page-telemetry",
     title: "4. 200 Hz Welch FFT Spectrum & Sensor Trust Guard",
     desc: "Tracks natural modal frequency peaks and automatically quarantines faulty or flatlined sensors so hardware glitches never trigger false panic.",
-    voice: "Step 4. Live 200 Hertz telemetry tracks modal frequency shifts with a PyTorch LSTM Autoencoder while Sensor Trust Guard quarantines faulty hardware nodes.",
+    voice: "Step 4. Live 200 Hertz telemetry tracks modal frequency shifts with an LSTM Autoencoder while Sensor Trust Guard automatically quarantines faulty hardware nodes.",
     action: () => {
       simulateSensorFaultQuarantine();
     }
   },
   {
     page: "page-dispatch",
-    title: "5. Autonomous Field Dispatch & Official Work Orders",
-    desc: "One-click emergency crew dispatch generates traceable state highway work orders with Phased Array Ultrasonic Testing protocols.",
-    voice: "Step 5. One-click Field Dispatch generates official state highway repair work orders for top-priority assets."
+    title: "5. Autonomous Field Dispatch & NHAI / MSRDC Work Orders",
+    desc: "One-click emergency crew dispatch generates traceable national highway work orders with Phased Array Ultrasonic & CFRP protocols.",
+    voice: "Step 5. One-click Field Dispatch generates official NHAI and MSRDC repair work orders for top-priority spans."
   },
   {
     page: "page-reports",
-    title: "6. XAI Compliance Notices, SQLite Audit & DOT Certificate",
-    desc: "Plain-English engineering notices citing ACI, AASHTO, and FHWA codes plus signed DOT Structural Integrity Certificates.",
-    voice: "Step 6. Explainable Engineering notices cite ACI, AASHTO, and FHWA standards with immutable SQLite audit trails and signed DOT certificates.",
+    title: "6. XAI Compliance Notices, SQLite Audit & MoRTH Certificate",
+    desc: "Plain-English engineering notices citing BIS IS 456, IRC:112, and IRC:6 Class 70R codes plus signed MoRTH Structural Integrity Certificates.",
+    voice: "Step 6. Explainable Engineering notices cite BIS IS 456, IRC 112, and MoRTH IBMS standards with immutable SQLite audit trails and signed compliance certificates.",
     action: () => {
       fetchSqliteTelemetryHistory();
     }

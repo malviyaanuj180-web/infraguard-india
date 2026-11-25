@@ -45,7 +45,7 @@ class RULPhysicsEngine:
         if not is_surface_cracked and not is_deflection_abnormal and not is_vibration_degraded:
             diagnosis = "Nominal Healthy State"
             pathology_code = "NOMINAL_HEALTHY"
-            explanation = "All structural telemetry within AASHTO / ACI allowable baseline design tolerances."
+            explanation = "All structural telemetry within BIS IS 456:2000 / IRC:112-2020 allowable baseline design tolerances."
             urgency = "LOW"
         elif is_surface_cracked and not is_deflection_abnormal and not is_vibration_degraded:
             diagnosis = "Cosmetic Surface Cracks"
@@ -369,30 +369,30 @@ class RULPhysicsEngine:
         if crack_width_mm > 1.0:
             alerts.append({
                 "severity": "CRITICAL",
-                "code": "ACI-224R-CRACK-EXCEEDED",
-                "title": "Crack Width Exceeds ACI 224R Structural Threshold",
+                "code": "IS-456-CRACK-EXCEEDED",
+                "title": "Crack Width Exceeds BIS IS 456:2000 & IRC:112 Threshold",
                 "timestamp": f"Year {year:.1f}",
-                "message": f"Surface crack opening at Span A-B Deck measured at {crack_width_mm:.2f}mm, violating maximum allowable 1.0mm flexural limit.",
-                "action": "Dispatch emergency structural inspection team; install fiber-optic strain gauges."
+                "message": f"Surface crack opening at Span A-B Deck measured at {crack_width_mm:.2f}mm, violating BIS IS 456:2000 & IRC:112-2020 flexural limit.",
+                "action": "Dispatch NHAI / MSRDC emergency structural team; install FBG fiber-optic strain gauges & epoxy injection."
             })
         elif crack_width_mm > 0.3:
             alerts.append({
                 "severity": "WARNING",
-                "code": "ACI-224R-CRACK-MODERATE",
-                "title": "Moderate Crack Growth Detected",
+                "code": "IS-456-CRACK-MODERATE",
+                "title": "Moderate Crack Growth (>0.30 mm IS 456 Limit)",
                 "timestamp": f"Year {year:.1f}",
-                "message": f"Crack opening at {crack_width_mm:.2f}mm. Accelerated chloride ingress risk into reinforcement zone.",
+                "message": f"Crack opening at {crack_width_mm:.2f}mm exceeds 0.30mm marine exposure threshold. Accelerated chloride ingress risk.",
                 "action": "Schedule epoxy pressure injection and hydrophobic sealing within 60 days."
             })
 
         if deck_sag_mm > 40.0:
             alerts.append({
                 "severity": "CRITICAL",
-                "code": "AASHTO-SAG-WARNING",
-                "title": "AASHTO Deflection Limit Alert",
+                "code": "IRC-6-SAG-WARNING",
+                "title": "IRC:6 Class 70R Deflection Limit Alert (L/800)",
                 "timestamp": f"Year {year:.1f}",
-                "message": f"Mid-span vertical displacement reaches {deck_sag_mm:.1f}mm (>25% allowable design limit).",
-                "action": "Enact axle weight restrictions and review stay cable tension calibration."
+                "message": f"Mid-span vertical displacement reaches {deck_sag_mm:.1f}mm (>25% of IRC:6 L/800 allowable design limit).",
+                "action": "Enact Class 70R axle weight restrictions and review stay-cable tension calibration."
             })
 
         if frequency_drop_pct > 5.0:
@@ -408,10 +408,10 @@ class RULPhysicsEngine:
         if exposed_rebar:
             alerts.append({
                 "severity": "CRITICAL",
-                "code": "FHWA-REBAR-EXPOSURE",
-                "title": "Exposed Reinforcing Steel Spalling",
+                "code": "IRC-112-REBAR-EXPOSURE",
+                "title": "Exposed Reinforcing Steel & Galvanic Spalling",
                 "timestamp": f"Year {year:.1f}",
-                "message": "Concrete cover spalled to level of longitudinal reinforcement. High galvanic corrosion rate active.",
+                "message": "Concrete cover spalled to level of Fe500 longitudinal reinforcement. High galvanic corrosion rate active.",
                 "action": "Immediate sandblasting, sacrificial zinc anode installation, and micro-concrete patch repair."
             })
 

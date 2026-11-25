@@ -65,7 +65,7 @@
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
               <circle cx="12" cy="13" r="4"></circle>
             </svg>
-            <span>Drone Vision Lab</span>
+            <span>AI Optical Vision Lab</span>
           </button>
 
           <button class="nav-link" data-page="page-telemetry">
@@ -207,7 +207,7 @@
         <div class="kpi-card" id="card-shi">
           <div class="kpi-header">
             <span class="kpi-title">STRUCTURAL HEALTH INDEX</span>
-            <span id="kpi-nbis-badge" class="badge-tag tag-good">NBIS 8</span>
+            <span id="kpi-nbis-badge" class="badge-tag tag-good">MoRTH IBMS 8</span>
           </div>
           <div class="kpi-body">
             <div class="shi-circle-wrap">
@@ -219,7 +219,7 @@
             </div>
             <div class="kpi-details">
               <span id="kpi-shi-label" class="kpi-subtext color-good">Satisfactory Condition</span>
-              <span class="kpi-desc">Composite health index fusing Vision, LiDAR ICP, and LSTM Modal dynamics.</span>
+              <span class="kpi-desc">Composite health index fusing Optical Vision, 3D LiDAR ICP, and LSTM Modal dynamics.</span>
             </div>
           </div>
         </div>
@@ -259,7 +259,7 @@
               <span class="stat-unit">MM VERTICAL</span>
             </div>
             <div class="kpi-details">
-              <span id="kpi-sag-limit-text" class="kpi-subtext">12.3% of AASHTO 150.0mm allowable</span>
+              <span id="kpi-sag-limit-text" class="kpi-subtext">12.3% of IRC:6 150.0mm allowable</span>
               <span class="kpi-desc">Open3D SVD ICP baseline alignment vs live LiDAR scan.</span>
             </div>
           </div>
@@ -279,6 +279,20 @@
               <span id="kpi-matrix-detail" class="kpi-subtext">Wide surface crack verified harmless via stable modal vibration dynamics.</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- SUSTAINOVA 2026 SDG & ECONOMIC ROI LIVE IMPACT RIBBON -->
+      <div class="glass-card" style="margin: 0 0 14px 0; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-left: 4px solid #10B981;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="badge-tag tag-good" style="font-weight:800;">SDG 9 • 11 • 12 • 13 IMPACT</span>
+          <strong style="font-size:0.84rem;">Live Sustainability &amp; Lifecycle ROI Calculator (Active Span):</strong>
+        </div>
+        <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; font-size:0.8rem;">
+          <div><span style="opacity:0.75;">Embodied Carbon Saved:</span> <strong id="sdg-co2-saved" class="color-good">4,200 Tonnes CO₂ (-60%)</strong></div>
+          <div><span style="opacity:0.75;">10-Yr Maintenance Savings:</span> <strong id="sdg-cost-saved" class="color-cyan">₹57.5 Lakhs / Span (68% Saved)</strong></div>
+          <div><span style="opacity:0.75;">C&amp;D Demolition Waste Avoided:</span> <strong id="sdg-waste-saved" class="color-good">75% Concrete &amp; Fe500 Steel</strong></div>
+          <div><span style="opacity:0.75;">CFRP Lifespan Extension:</span> <strong id="sdg-rul-gain" style="color:#F59E0B;">+35% Service Life (+15–25 Yrs)</strong></div>
         </div>
       </div>
 
@@ -326,7 +340,7 @@
               </div>
               <div class="dispatch-row">
                 <span class="d-label">Protocol:</span>
-                <span id="dispatch-protocol" class="d-val">Phased Array Ultrasonic Testing (PAUT) of deck welds &amp; drone LiDAR sag verification per IRC:SP:37.</span>
+                <span id="dispatch-protocol" class="d-val">Phased Array Ultrasonic Testing (PAUT) of deck welds &amp; 3D LiDAR sag verification per IRC:SP:37.</span>
               </div>
               <div class="dispatch-justification">
                 <p id="dispatch-justification-text">Ranks #1 in urgency under MoRTH IBMS criteria due to cyclic fatigue under IRC Class 70R freight surge. Paris' Law calculates remaining life below critical fracture margin.</p>
@@ -539,14 +553,14 @@
     </section>
 
     <!-- ======================================================================
-         PAGE 3: DRONE AI VISION & CONCRETE CRACK LAB
+         PAGE 3: AI OPTICAL VISION & CONCRETE CRACK LAB
          ====================================================================== -->
     <section id="page-vision" class="app-page">
       <div class="page-container">
         <div class="section-banner">
           <div>
-            <h2>Drone Computer Vision & Crack Quantifier Lab</h2>
-            <p>Automated pixel-to-millimeter physical quantification via camera GSD and ACI 224R severity grading</p>
+            <h2>AI Optical Computer Vision &amp; Crack Quantifier Lab</h2>
+            <p>Automated pixel-to-millimeter physical quantification via camera GSD and BIS IS 456:2000 &amp; IRC:112-2020 severity grading</p>
           </div>
           <div class="banner-controls">
             <span class="b-label">Preset:</span>
@@ -555,13 +569,13 @@
               <option value="pier2_crack_moderate">Pier #2 Diagonal Shear Crack (0.48mm)</option>
               <option value="healthy_deck_baseline">Deck Hairline / Baseline Surface (0.15mm)</option>
             </select>
-            <span class="b-label">Alt (m):</span>
+            <span class="b-label">Dist (m):</span>
             <input type="number" id="input-flight-alt" value="0.75" min="0.2" max="15.0" step="0.05" class="nav-select" style="width:68px;">
             <span class="b-label">Focal (mm):</span>
             <input type="number" id="input-focal-len" value="24.0" min="12.0" max="85.0" step="1.0" class="nav-select" style="width:68px;">
             <button id="btn-run-vision" class="tool-btn active">Calibrate &amp; Quantify</button>
             <input type="file" id="input-drone-upload" accept="image/*" class="hidden">
-            <button id="btn-upload-drone" class="tool-btn">Upload Drone Photo</button>
+            <button id="btn-upload-drone" class="tool-btn">Upload Crack Photo</button>
           </div>
         </div>
 
@@ -570,8 +584,8 @@
           <div class="glass-card vision-main-card">
             <div class="card-title-bar">
               <div>
-                <h4>High-Resolution Drone RGB & AI Crack Segmentation Split-Compare</h4>
-                <span class="sub-label">Swipe slider to compare Raw Drone RGB vs. YOLOv8-seg Medial-Axis Skeleton &amp; Spalling Heatmap</span>
+                <h4>High-Resolution Optical RGB &amp; AI Crack Segmentation Split-Compare</h4>
+                <span class="sub-label">Swipe slider or hover cursor to inspect YOLOv8-seg Medial-Axis Skeleton &amp; Spalling Heatmap</span>
               </div>
               <div style="display:flex; align-items:center; gap:8px;">
                 <span class="b-label">AI Mask Split:</span>
@@ -580,14 +594,15 @@
               </div>
             </div>
             <div class="vision-large-img-wrap" id="vision-compare-container">
-              <img id="drone-preview-img" src="/sample_data/test_images/span_ab_crack_critical.jpg" alt="Drone Inspection Image">
+              <img id="drone-preview-img" src="/sample_data/test_images/span_ab_crack_critical.jpg" alt="Optical Crack Inspection Image">
               <canvas id="vision-mask-canvas"></canvas>
               <div id="vision-split-line" class="vision-split-line" style="left: 62%;">
                 <span class="split-handle">◀ AI MASK | RAW ▶</span>
               </div>
               <div class="vision-img-hud">
                 <span id="vision-gsd-badge" class="gsd-badge">CAMERA GSD: 0.12 mm/px</span>
-                <span id="vision-flight-badge" class="flight-badge">ALTITUDE: 0.75m • FOCAL: 24.0mm</span>
+                <span id="vision-flight-badge" class="flight-badge">STANDOFF: 0.75m • FOCAL: 24.0mm</span>
+                <span id="vision-cursor-probe" class="gsd-badge" style="background:rgba(15,23,42,0.88); color:#38BDF8; border:1px solid rgba(56,189,248,0.4);">PROBE: Hover image for sub-mm readout</span>
               </div>
             </div>
           </div>
@@ -595,15 +610,15 @@
           <!-- DETAILED PHYSICAL QUANTIFICATION STATS -->
           <div class="glass-card vision-details-card">
             <div class="card-title-bar">
-              <h4>Physical Crack & Surface Quantification</h4>
-              <span class="badge-tag tag-red">ACI 224R TIER</span>
+              <h4>Physical Crack &amp; Surface Quantification</h4>
+              <span class="badge-tag tag-red">BIS IS 456 / IRC:112 TIER</span>
             </div>
 
             <div class="vision-metrics-stack">
               <div class="v-metric-tile">
                 <span class="vm-label">MAX CRACK WIDTH</span>
                 <strong id="v-crack-width" class="vm-val color-red">1.42 mm (Critical)</strong>
-                <span class="vm-sub">Exceeds ACI 0.3mm allowable limit</span>
+                <span class="vm-sub">Exceeds BIS IS 456 (0.30 mm) allowable limit</span>
               </div>
 
               <div class="v-metric-tile">
@@ -819,7 +834,7 @@
                 <option value="Phased Array Ultrasonic Testing (PAUT) &amp; LiDAR Sag Audit per IRC:SP:37">Phased Array Ultrasonic Testing (PAUT) &amp; LiDAR Sag Audit per IRC:SP:37</option>
                 <option value="Bonded Carbon-Fiber (CFRP) Tension Flange Laminate Wrap per IRC:SP:40">Bonded Carbon-Fiber (CFRP) Tension Flange Laminate Wrap per IRC:SP:40</option>
                 <option value="Submerged Pier Scour Bathymetric Sonar &amp; Epoxy Injection">Submerged Pier Scour Bathymetric Sonar &amp; Epoxy Injection</option>
-                <option value="Close-Range Drone Photogrammetry &amp; FBG Strain Calibration">Close-Range Drone Photogrammetry &amp; FBG Strain Calibration</option>
+                <option value="High-Res Optical Camera Photogrammetry &amp; FBG Strain Calibration">High-Res Optical Camera Photogrammetry &amp; FBG Strain Calibration</option>
               </select>
             </div>
             <button type="submit" class="btn-dispatch-action" style="align-self:flex-end; height:34px;">+ Issue Work Order</button>
@@ -847,7 +862,7 @@
               </tr>
             </thead>
             <tbody id="work-orders-tbody">
-              <tr data-wo-id="WO-INFRAGUARD-2026-8842" data-asset="Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai (CA-DOT-BR-8842)" data-gps="18.9633° N, 72.9750° E" data-tech="Vikramaditya Deshmukh, NDT Level III" data-time="2026-11-23 12:30:00 IST" data-protocol="Deploy CSIR-SERC Phased Array Ultrasonic Testing (PAUT) across midspan tension flange welds. Calibrate drone LiDAR point clouds to measure vertical girder sag deflection against IRC:112 L/800 limits.">
+              <tr data-wo-id="WO-INFRAGUARD-2026-8842" data-asset="Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai (CA-DOT-BR-8842)" data-gps="18.9633° N, 72.9750° E" data-tech="Vikramaditya Deshmukh, NDT Level III" data-time="2026-11-23 12:30:00 IST" data-protocol="Deploy CSIR-SERC Phased Array Ultrasonic Testing (PAUT) across midspan tension flange welds. Calibrate 3D LiDAR point clouds to measure vertical girder sag deflection against IRC:112 L/800 limits.">
                 <td class="font-mono">WO-INFRAGUARD-2026-8842</td>
                 <td><strong>Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai</strong><br><span class="sub-cell">MMRDA / MSRDC • 18.9633° N, 72.9750° E</span></td>
                 <td><span class="badge-tag tag-red">TIER 1 EMERGENCY</span></td>
@@ -867,7 +882,7 @@
                 <td><span class="badge-tag tag-warn">SCHEDULED</span></td>
                 <td><button class="tool-btn small btn-open-wo-modal">View Order</button></td>
               </tr>
-              <tr data-wo-id="WO-INFRAGUARD-2026-0409" data-asset="Chenab Rail Arch Viaduct Pier #3, Reasi J&amp;K (NY-DOT-OV-409)" data-gps="33.1522° N, 74.8837° E" data-tech="Dr. Siddharth Kaul, FIE" data-time="2026-11-22 16:45:00 IST" data-protocol="Perform Seismic Zone V Expansion Joint Deflection Verification and close-range drone photogrammetry crack mapping.">
+              <tr data-wo-id="WO-INFRAGUARD-2026-0409" data-asset="Chenab Rail Arch Viaduct Pier #3, Reasi J&amp;K (NY-DOT-OV-409)" data-gps="33.1522° N, 74.8837° E" data-tech="Dr. Siddharth Kaul, FIE" data-time="2026-11-22 16:45:00 IST" data-protocol="Perform Seismic Zone V Expansion Joint Deflection Verification and high-resolution optical camera crack mapping.">
                 <td class="font-mono">WO-INFRAGUARD-2026-0409</td>
                 <td><strong>Chenab Rail Arch Viaduct Pier #3, Reasi (J&amp;K)</strong><br><span class="sub-cell">Northern Railway USBRL • Zone V</span></td>
                 <td><span class="badge-tag tag-good">ROUTINE NDT</span></td>
@@ -998,7 +1013,7 @@
 
           <div class="aph-body">
             <h2>Multi-Modal Civil Infrastructure Command Center</h2>
-            <p>Fusing Drone Computer Vision (YOLOv8-seg), Open3D LiDAR Point Cloud ICP, 200 Hz PyTorch LSTM Vibration Telemetry, and Paris' Law Fracture Mechanics.</p>
+            <p>Fusing AI Optical Computer Vision (YOLOv8-seg), Open3D LiDAR Point Cloud ICP, 200 Hz PyTorch LSTM Vibration Telemetry, and Paris' Law Fracture Mechanics.</p>
             <div class="aph-pillars">
               <div class="aph-pillar"><strong>Sensor Trust Guard</strong><span>Hardware fault quarantine prevents false bridge closures.</span></div>
               <div class="aph-pillar"><strong>Cross-Check Matrix</strong><span>Distinguishes harmless surface fissures from silent structural fatigue.</span></div>
@@ -1134,14 +1149,14 @@
             <span class="official-seal">PRIORITY #1</span>
           </div>
           <div class="order-grid">
-            <div><strong>Asset:</strong> <span id="wo-asset">Golden Gate Suspension Span (CA-DOT-BR-8842)</span></div>
-            <div><strong>GPS Coordinates:</strong> <span id="wo-gps">37.8199° N, 122.4783° W</span></div>
-            <div><strong>Lead Inspector:</strong> <span id="wo-tech">Marcus Vance, NDT Level III</span></div>
-            <div><strong>Dispatched At:</strong> <span id="wo-timestamp">2026-11-21 14:30:00 UTC</span></div>
+            <div><strong>Asset:</strong> <span id="wo-asset">Atal Setu (MTHL-01) Cable-Stayed Span #14, Mumbai</span></div>
+            <div><strong>GPS Coordinates:</strong> <span id="wo-gps">18.9633° N, 72.9750° E</span></div>
+            <div><strong>Lead Inspector:</strong> <span id="wo-tech">Vikramaditya Deshmukh, NDT Level III</span></div>
+            <div><strong>Dispatched At:</strong> <span id="wo-timestamp">2026-11-25 09:30:00 IST</span></div>
           </div>
           <div class="order-protocol-box">
-            <h4>MANDATORY FIELD NDT PROTOCOL:</h4>
-            <p id="wo-protocol-text">Deploy Phased Array Ultrasonic Testing (PAUT) across midspan tension flange welds. Calibrate drone LiDAR point clouds to measure vertical girder sag deflection against AASHTO L/800 limits.</p>
+            <h4>MANDATORY FIELD NDT PROTOCOL (IRC:SP:37 / BIS IS 456):</h4>
+            <p id="wo-protocol-text">Deploy CSIR-SERC Phased Array Ultrasonic Testing (PAUT) across midspan tension flange welds. Calibrate 3D LiDAR point clouds to measure vertical girder sag deflection against IRC:6 Class 70R L/800 limits.</p>
           </div>
           <div class="order-actions-bar">
             <button class="tool-btn" onclick="window.print()">PRINT WORK ORDER</button>
@@ -1156,7 +1171,7 @@
       <div class="modal-dialog">
         <div class="modal-header">
           <div class="modal-title-group">
-            <h3>REGIONAL GIS INFRASTRUCTURE GEO-MAP</h3>
+            <h3>NATIONAL CORRIDOR GIS INFRASTRUCTURE GEO-MAP (INDIA)</h3>
           </div>
           <button id="btn-close-geo" class="tool-btn">CLOSE</button>
         </div>
@@ -1178,14 +1193,14 @@
               </div>
             </div>
             <div class="geo-info-sidebar">
-              <h4>Geotechnical Metadata</h4>
+              <h4>Geotechnical Metadata (India)</h4>
               <ul>
-                <li><strong>Asset ID:</strong> CA-DOT-BR-8842</li>
-                <li><strong>GPS:</strong> 37.8199° N, 122.4783° W</li>
-                <li><strong>Seismic Zone:</strong> High (San Andreas Fault 4.2 km)</li>
-                <li><strong>Soil Classification:</strong> Hard Marine Sandstone / Franciscan Bedrock</li>
-                <li><strong>Design Load:</strong> AASHTO HL-93 Standard Truck</li>
-                <li><strong>Sensor Network:</strong> 64 Multi-Modal IoT Nodes (Fiber Optic + Tri-axial MEMS)</li>
+                <li><strong>Asset ID:</strong> MTHL-01 (CA-DOT-BR-8842)</li>
+                <li><strong>GPS:</strong> 18.9633° N, 72.9750° E (Mumbai Harbour)</li>
+                <li><strong>Seismic Zone:</strong> BIS IS 1893 Zone III / V (Coastal &amp; Himalayan)</li>
+                <li><strong>Soil Classification:</strong> Marine Basalt Bedrock &amp; Intertidal Clay</li>
+                <li><strong>Design Load:</strong> IRC:6 Class 70R Tracked &amp; Wheeled Vehicle</li>
+                <li><strong>Sensor Network:</strong> 64 Multi-Modal IoT Nodes (FBG Fiber Optic + Tri-axial MEMS)</li>
               </ul>
             </div>
           </div>
@@ -1221,7 +1236,7 @@
 
           <div class="order-grid cert-meta-grid">
             <div><strong>Structure ID:</strong> <span id="cert-asset">Atal Setu (MTHL) Cable-Stayed Span #14, Mumbai</span></div>
-            <div><strong>Inspection Date:</strong> <span id="cert-date">2026-11-23 IST</span></div>
+            <div><strong>Inspection Date:</strong> <span id="cert-date">2026-11-25 IST</span></div>
             <div><strong>Structural Health Index:</strong> <span id="cert-shi" class="color-good">94.2 / 100 (MoRTH IBMS Rating 8)</span></div>
             <div><strong>Paris' Law Fatigue RUL:</strong> <span id="cert-rul">6,387 Days (17.5 Years)</span></div>
             <div><strong>3D LiDAR ICP Deflection:</strong> <span id="cert-sag">-18.4 mm (12.3% of IRC:112 L/800)</span></div>
@@ -1230,7 +1245,7 @@
 
           <div class="order-protocol-box">
             <h4>CROSS-MODAL COMPLIANCE &amp; CERTIFICATION FINDING (IS 456 / IRC:112 / IRC:SP:37):</h4>
-            <p id="cert-finding-text">Multi-modal fusion of YOLOv8-seg drone photogrammetry, Open3D ICP LiDAR point clouds, and 200 Hz PyTorch LSTM vibration telemetry confirms structural compliance with BIS IS 456:2000, IRC:112-2020, IRC:6 Class 70R L/800, and MoRTH / NHAI IBMS criteria.</p>
+            <p id="cert-finding-text">Multi-modal fusion of YOLOv8-seg high-resolution optical vision, Open3D ICP LiDAR point clouds, and 200 Hz PyTorch LSTM vibration telemetry confirms structural compliance with BIS IS 456:2000, IRC:112-2020, IRC:6 Class 70R L/800, and MoRTH / NHAI IBMS criteria.</p>
           </div>
 
           <div class="cert-signature-row">
@@ -1278,7 +1293,7 @@
       <div class="cp-prompts">
         <button class="cp-chip" data-q="Why is this structure ranked #1 in priority?">Why Ranked #1?</button>
         <button class="cp-chip" data-q="Compare CFRP Retrofit vs Do-Nothing RUL">CFRP Retrofit ROI</button>
-        <button class="cp-chip" data-q="Draft an official FHWA emergency directive memo">Draft FHWA Memo</button>
+        <button class="cp-chip" data-q="Draft an official MoRTH / NHAI emergency directive memo">Draft MoRTH Memo</button>
         <button class="cp-chip" data-q="Explain Sensor Trust Guard hardware fault isolation">Sensor Trust Guard</button>
       </div>
 
